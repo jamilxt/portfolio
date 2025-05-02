@@ -1,4 +1,4 @@
-package com.pondit.portfolio.model;
+package com.pondit.portfolio.model.domain;
 
 public class Project {
     private final String name; // required
