@@ -1,25 +1,23 @@
-package com.pondit.portfolio.controller;
+package com.pondit.portfolio.controller.rest;
 
 import com.pondit.portfolio.model.domain.Project;
 import com.pondit.portfolio.model.dto.CreateProjectRequest;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/projects")
 public class ProjectRestController {
     List<Project> projects = new ArrayList<>();
 
-    @GetMapping("/api/projects")
+    @GetMapping
     public List<Project> getAllProjects() {
         return projects;
     }
 
-    @PostMapping("/api/projects")
+    @PostMapping
     public Project createProject(@RequestBody CreateProjectRequest request) {
         // TODO: validate input
         // TODO: business logic
