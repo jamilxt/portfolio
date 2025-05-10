@@ -4,6 +4,7 @@ import com.pondit.portfolio.model.domain.Project;
 import com.pondit.portfolio.model.dto.CreateProjectRequest;
 import com.pondit.portfolio.service.ProjectService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/projects")
 public class ProjectRestController {
-    ProjectService projectService = new ProjectService();
+    @Autowired
+    ProjectService projectService;
 
     @GetMapping
     public List<Project> getAllProjects() {
