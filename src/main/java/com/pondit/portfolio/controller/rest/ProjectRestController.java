@@ -13,14 +13,12 @@ import java.util.List;
 @RequestMapping("/api/projects")
 public class ProjectRestController {
 
-    @Tag(name = "Get All Projects", description = "Get all projects")
     @GetMapping
     public List<Project> getAllProjects() {
         ProjectService projectService = new ProjectService();
         return projectService.getAllProjects();
     }
 
-    @Tag(name = "Create Project", description = "Create a new project")
     @PostMapping
     public Project createProject(@RequestBody CreateProjectRequest request) {
         // TODO: validate input
