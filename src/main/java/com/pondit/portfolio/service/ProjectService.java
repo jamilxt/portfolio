@@ -2,28 +2,43 @@ package com.pondit.portfolio.service;
 
 import com.pondit.portfolio.model.domain.Project;
 import com.pondit.portfolio.model.dto.CreateProjectRequest;
+import com.pondit.portfolio.persistence.entity.ProjectEntity;
+import com.pondit.portfolio.persistence.repository.ProjectRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ProjectService {
-    List<Project> projects = new ArrayList<>();
+    @Autowired
+    ProjectRepository projectRepository;
 
     public List<Project> getAllProjects() {
-        return projects;
+        List<ProjectEntity> entityList = projectRepository.findAll();
+        return entityList.stream().map(projectEntity -> {
+            Long entityId = projectEntity.getId();
+            String entityName = projectEntity.getName();
+            String entityDescription = projectEntity.getDescription();
+            return new Project(entityId, entityName, entityDescription);
+        }).toList();
     }
 
     public Project createProject(CreateProjectRequest request) {
+        // request
         String name = request.getName();
         String description = request.getDescription();
 
-        Project project = new Project(name, description);
-        projects.add(project);
+        // save to database
+        ProjectEntity entity = new ProjectEntity();
+        entity.setName(name);
+        entity.setDescription(description);
+        ProjectEntity savedEntity = projectRepository.save(entity); // create operation
 
-        // TODO: save to database/file or network call
-
-        return project;
+        // map entity to domain object
+        Long savedEntityId = savedEntity.getId();
+        String savedEntityName = savedEntity.getName();
+        String savedEntityDescription = savedEntity.getDescription();
+        return new Project(savedEntityId, savedEntityName, savedEntityDescription);
     }
 }
