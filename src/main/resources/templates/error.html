@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${errorCode} + ' - Error - Neubrutalist Blog'">Error - Neubrutalist Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f5f5f5;
+            color: #000;
+        }
+        .neubrutalist-header {
+            background-color: #ff0077;
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0 #000;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+        .neubrutalist-card {
+            border: 3px solid #000;
+            box-shadow: 6px 6px 0 #000;
+            background-color: #fff;
+            margin-bottom: 2rem;
+            transition: transform 0.2s;
+        }
+        .neubrutalist-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 10px 10px 0 #000;
+        }
+        .btn-neubrutalist {
+            background-color: #00ffcc;
+            border: 2px solid #000;
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            box-shadow: 4px 4px 0 #000;
+        }
+        .btn-neubrutalist:hover {
+            background-color: #00cc99;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #000;
+        }
+        h1, h2 {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .error-content {
+            text-align: center;
+            padding: 3rem;
+        }
+        .error-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .error-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+<header class="neubrutalist-header">
+    <div class="container">
+        <h1 class="display-4" th:text="${errorCode} + ' - Error'">Error</h1>
+        <p class="lead" th:text="${errorMessage}">Oops, something went wrong!</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="neubrutalist-card error-content">
+                <h2 th:text="${errorCode} + ' Error'">Error</h2>
+                <p th:text="${errorMessage}">The page you're looking for doesn't exist or has been moved.</p>
+                <a href="/" class="btn btn-neubrutalist">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="neubrutalist-header py-3 mt-5">
+    <div class="container text-center">
+        <p>© 2025 My Neubrutalist Blog. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
