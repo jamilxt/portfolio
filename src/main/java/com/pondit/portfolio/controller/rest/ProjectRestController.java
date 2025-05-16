@@ -1,5 +1,6 @@
 package com.pondit.portfolio.controller.rest;
 
+import com.pondit.portfolio.exception.NotFoundException;
 import com.pondit.portfolio.model.domain.Project;
 import com.pondit.portfolio.model.dto.CreateProjectRequest;
 import com.pondit.portfolio.service.ProjectService;
@@ -33,8 +34,10 @@ public class ProjectRestController {
         Project project;
         try {
             project = projectService.getProjectById(id);
-        } catch (RuntimeException e) {
+        } catch (NotFoundException e) {
             return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
         }
 
         return ResponseEntity.ok(project);

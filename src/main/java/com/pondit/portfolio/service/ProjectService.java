@@ -1,5 +1,6 @@
 package com.pondit.portfolio.service;
 
+import com.pondit.portfolio.exception.NotFoundException;
 import com.pondit.portfolio.model.domain.Project;
 import com.pondit.portfolio.model.dto.CreateProjectRequest;
 import com.pondit.portfolio.persistence.entity.ProjectEntity;
@@ -43,10 +44,10 @@ public class ProjectService {
         return new Project(savedEntityId, savedEntityName, savedEntityDescription);
     }
 
-    public Project getProjectById(Long id) {
+    public Project getProjectById(Long id) throws NotFoundException {
         Optional<ProjectEntity> projectEntityOptional = projectRepository.findById(id);
         if (projectEntityOptional.isEmpty()) {
-            throw new RuntimeException("Project not found");
+            throw new NotFoundException("Project not found"); // bad practice
         }
 
         // query on database
@@ -54,6 +55,7 @@ public class ProjectService {
         Long entityId = projectEntity.getId();
         String entityName = projectEntity.getName();
         String entityDescription = projectEntity.getDescription();
+
 
         // map entity to domain object
         Project project = new Project(entityId, entityName, entityDescription);
