@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Details - Neubrutalist Blog</title>
+    <title th:text="${post.title} + ' - Neubrutalist Blog'">Post Details - Neubrutalist Blog</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body {
@@ -65,7 +65,6 @@
             box-shadow: 5px 5px 0 #000;
         }
         h1, h2, h3, h4 {
-            ross: 4px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -122,79 +121,22 @@
         <div class="col-lg-8">
             <!-- Post Content -->
             <div class="neubrutalist-card p-4">
-                <h2>Exploring Java Concurrency with Thread Pools</h2>
-                <p class="post-meta">Posted on May 17, 2025 by Author</p>
-                <div class="post-content">
-                    <h3>Why Java Concurrency Matters</h3>
-                    <p>Java’s concurrency utilities, introduced in **Java 5**, provide robust tools for managing multi-threaded applications. Thread pools, in particular, are essential for optimizing resource usage and improving performance in applications with multiple tasks.</p>
-
-                    <h4>Key Benefits of Thread Pools:</h4>
-                    <ul>
-                        <li>**Resource Management**: Reuses threads to reduce overhead.</li>
-                        <li>**Scalability**: Handles large numbers of tasks efficiently.</li>
-                        <li>**Simplified Control**: Manages thread lifecycle automatically.</li>
-                    </ul>
-
-                    <p>Below is an example of using a **ThreadPoolExecutor** to process tasks concurrently. This code demonstrates creating a thread pool and submitting tasks to it. <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ThreadPoolExecutor.html" class="text-dark">Learn more in the official Java documentation</a>.</p>
-
-                    <div class="code-header">
-                        <button class="btn btn-copy" onclick="copyCode()">Copy</button>
-                    </div>
-<!--                    <pre><code class="language-java">import java.util.concurrent.*;-->
-
-<!--public class ThreadPoolExample {-->
-<!--    public static void main(String[] args) {-->
-<!--        // Create a thread pool with 2-4 threads-->
-<!--        ThreadPoolExecutor executor = new ThreadPoolExecutor(-->
-<!--            2, 4, 60L, TimeUnit.SECONDS, new LinkedBlockingQueue<>()-->
-<!--        );-->
-
-<!--        // Submit 5 tasks to the thread pool-->
-<!--        for (int i = 1; i <= 5; i++) {-->
-<!--            final int taskId = i;-->
-<!--            executor.submit(() -> {-->
-<!--                System.out.println("Task " + taskId + " is running on " + Thread.currentThread().getName());-->
-<!--                try {-->
-<!--                    Thread.sleep(1000); // Simulate work-->
-<!--                } catch (InterruptedException e) {-->
-<!--                    e.printStackTrace();-->
-<!--                }-->
-<!--                System.out.println("Task " + taskId + " completed");-->
-<!--            });-->
-<!--        }-->
-
-<!--        // Shutdown the executor-->
-<!--        executor.shutdown();-->
-<!--        try {-->
-<!--            executor.awaitTermination(10, TimeUnit.SECONDS);-->
-<!--        } catch (InterruptedException e) {-->
-<!--            e.printStackTrace();-->
-<!--        }-->
-<!--    }-->
-<!--}-->
-<!--</code></pre>-->
-
-                    <h4>How It Works:</h4>
-                    <ol>
-                        <li><strong>ThreadPoolExecutor Creation</strong>: Configures a pool with a core size of 2 and a maximum of 4 threads.</li>
-                        <li><strong>Task Submission</strong>: Submits 5 tasks, which are executed by available threads.</li>
-                        <li><strong>Shutdown</strong>: Gracefully stops the executor after tasks are complete.</li>
-                    </ol>
-
-                    <p>This is a basic example. For production, consider tuning parameters like queue size and rejection policies based on your application’s needs.</p>
+                <h2 th:text="${post.title}">Exploring Java Concurrency with Thread Pools</h2>
+                <p class="post-meta" th:text="'Posted on ' + ${post.createdAt} + ' by ' + ${post.author}">Posted on May 17, 2025 by Author</p>
+                <div class="post-content" th:utext="${markdownContent}">
+                    <!-- Markdown content will be rendered as HTML here -->
                 </div>
                 <a href="/" class="btn btn-neubrutalist mt-3">Back to Home</a>
             </div>
             <!-- Comment Section -->
             <div class="neubrutalist-card p-4 comment-section">
                 <h3>Comments</h3>
-                <div class="comment-item">
-                    <p><strong>Jane Doe</strong> | May 17, 2025</p>
-                    <p>Great explanation of thread pools! The example was super clear.</p>
-                </div>
-                <div class="comment-item">
-                    <p><strong>John Smith</strong> | May 17, 2025</p>
-                    <p>Thanks for the Java concurrency insights!</p>
+                <div th:each="comment : ${comments}" class="comment-item">
+                    <p>
+                        <strong th:text="${comment.author}">Jane Doe</strong> |
+                        <span th:text="${comment.createdAt}">May 17, 2025</span>
+                    </p>
+                    <p th:text="${comment.content}">Great explanation of thread pools! The example was super clear.</p>
                 </div>
                 <h4>Leave a Comment</h4>
                 <form>
@@ -239,12 +181,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
     function copyCode() {
-        const code = document.querySelector('pre code').innerText;
-        navigator.clipboard.write(code).then(() => {
-            alert('Code copied to clipboard!');
-        }).catch(err => {
-            console.error('Failed to copy code: ', err);
-        });
+        const codeElements = document.querySelectorAll('pre code');
+        if (codeElements.length > 0) {
+            const code = codeElements[0].innerText;
+            navigator.clipboard.write(code).then(() => {
+                alert('Code copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy code: ', err);
+            });
+        }
     }
 </script>
 </body>
