@@ -1,6 +1,14 @@
 # Portfolio
 Spring Boot Application
 
+## Checklist
+- [x] Swagger
+- [ ] API Paging and Sorting
+- [ ] Global Exception Handler
+- [ ] Logging
+- [ ] Boilerplate Code Reduce: Mapper
+- [ ] Boilerplate Code Reduce: Lombok
+- [ ] Spring Security
 
 ## How to run
 ```
