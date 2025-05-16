@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -104,44 +104,34 @@
             <!-- Personal Info -->
             <div class="neubrutalist-card p-4 resume-section">
                 <h2>Personal Info</h2>
-                <p><strong>Name:</strong> John Doe</p>
-                <p><strong>Email:</strong> john.doe@example.com</p>
-                <p><strong>LinkedIn:</strong> <a href="#" class="text-dark">linkedin.com/in/johndoe</a></p>
-                <p><strong>GitHub:</strong> <a href="#" class="text-dark">github.com/johndoe</a></p>
+                <p><strong>Name:</strong> <span th:text="${personalInfo.name}">John Doe</span></p>
+                <p><strong>Email:</strong> <span th:text="${personalInfo.email}">john.doe@example.com</span></p>
+                <p><strong>LinkedIn:</strong> <a th:href="${personalInfo.linkedinUrl}" th:text="${personalInfo.linkedinUrl}" class="text-dark">linkedin.com/in/johndoe</a></p>
+                <p><strong>GitHub:</strong> <a th:href="${personalInfo.githubUrl}" th:text="${personalInfo.githubUrl}" class="text-dark">github.com/johndoe</a></p>
             </div>
             <!-- Education -->
             <div class="neubrutalist-card p-4 resume-section">
                 <h2>Education</h2>
-                <div class="resume-item">
-                    <h4>B.S. in Computer Science</h4>
-                    <p><strong>University of Example</strong> | 2018 - 2022</p>
-                    <p>Graduated with honors, focusing on software engineering and distributed systems.</p>
+                <div class="resume-item" th:each="edu : ${education}">
+                    <h4 th:text="${edu.degree}">B.S. in Computer Science</h4>
+                    <p><strong th:text="${edu.institution}">University of Example</strong> | <span th:text="${edu.years}">2018 - 2022</span></p>
+                    <p th:text="${edu.description}">Graduated with honors, focusing on software engineering and distributed systems.</p>
                 </div>
             </div>
             <!-- Experience -->
             <div class="neubrutalist-card p-4 resume-section">
                 <h2>Experience</h2>
-                <div class="resume-item">
-                    <h4>Software Engineer</h4>
-                    <p><strong>Tech Corp</strong> | 2022 - Present</p>
-                    <p>Developed scalable backend systems using Spring Boot and microservices architecture.</p>
-                </div>
-                <div class="resume-item">
-                    <h4>Junior Developer</h4>
-                    <p><strong>Startup Inc.</strong> | 2021 - 2022</p>
-                    <p>Built responsive web applications with Java and Thymeleaf, improving user engagement by 20%.</p>
+                <div class="resume-item" th:each="exp : ${experience}">
+                    <h4 th:text="${exp.title}">Software Engineer</h4>
+                    <p><strong th:text="${exp.company}">Tech Corp</strong> | <span th:text="${exp.years}">2022 - Present</span></p>
+                    <p th:text="${exp.description}">Developed scalable backend systems using Spring Boot and microservices architecture.</p>
                 </div>
             </div>
             <!-- Skills -->
             <div class="neubrutalist-card p-4 resume-section">
                 <h2>Skills</h2>
                 <ul class="skills-list">
-                    <li>Java</li>
-                    <li>Spring Boot</li>
-                    <li>Microservices</li>
-                    <li>PostgreSQL</li>
-                    <li>Thymeleaf</li>
-                    <li>Tailwind CSS</li>
+                    <li th:each="skill : ${skills}" th:text="${skill}">Java</li>
                 </ul>
             </div>
         </div>
@@ -149,9 +139,9 @@
             <div class="sidebar">
                 <h3>Navigation</h3>
                 <ul class="list-unstyled">
-                    <li><a href="index.html" class="text-dark">Home</a></li>
-                    <li><a href="#" class="text-dark">Resume</a></li>
-                    <li><a href="index.html#contact" class="text-dark">Contact</a></li>
+                    <li><a href="/index" class="text-dark">Home</a></li>
+                    <li><a href="/resume" class="text-dark">Resume</a></li>
+                    <li><a href="/index#contact" class="text-dark">Contact</a></li>
                 </ul>
                 <h3>Subscribe</h3>
                 <form>
