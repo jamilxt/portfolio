@@ -134,6 +134,14 @@
                     <li th:each="skill : ${skills}" th:text="${skill}">Java</li>
                 </ul>
             </div>
+            <!-- Experience -->
+            <div class="neubrutalist-card p-4 resume-section">
+                <h2>Projects</h2>
+                <div class="resume-item" th:each="project : ${projects}">
+                    <h4 th:text="${project.name}">Personal Portfolio</h4>
+                    <p th:text="${project.description}">Developed Personal Portfolio & Blog Management System using Spring Boot and monolith architecture.</p>
+                </div>
+            </div>
         </div>
         <div class="col-lg-4">
             <div class="sidebar">
