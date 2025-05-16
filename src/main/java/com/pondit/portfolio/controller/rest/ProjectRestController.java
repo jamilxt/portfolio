@@ -11,7 +11,7 @@ import java.util.List;
 
 @Tag(name = "Project Resource", description = "API for managing projects")
 @RestController
-@RequestMapping("/api/projects")
+@RequestMapping("api/projects")
 public class ProjectRestController {
     @Autowired
     ProjectService projectService;
@@ -25,6 +25,11 @@ public class ProjectRestController {
     public Project createProject(@RequestBody CreateProjectRequest request) {
         // TODO: validate input
         return projectService.createProject(request);
+    }
+
+    @GetMapping("{id}")
+    public Project getProject(@PathVariable Long id) {
+        return projectService.getProjectById(id);
     }
 
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectService {
@@ -40,5 +41,22 @@ public class ProjectService {
         String savedEntityName = savedEntity.getName();
         String savedEntityDescription = savedEntity.getDescription();
         return new Project(savedEntityId, savedEntityName, savedEntityDescription);
+    }
+
+    public Project getProjectById(Long id) {
+        Optional<ProjectEntity> projectEntityOptional = projectRepository.findById(id);
+        if (projectEntityOptional.isEmpty()) {
+            throw new RuntimeException("Project not found");
+        }
+
+        // query on database
+        ProjectEntity projectEntity = projectEntityOptional.get();
+        Long entityId = projectEntity.getId();
+        String entityName = projectEntity.getName();
+        String entityDescription = projectEntity.getDescription();
+
+        // map entity to domain object
+        Project project = new Project(entityId, entityName, entityDescription);
+        return project;
     }
 }

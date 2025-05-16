@@ -2,8 +2,11 @@ package com.pondit.portfolio.model.domain;
 
 public class Project {
     private Long id;
-    private final String name; // required
-    private final String description; // required
+    private String name; // required
+    private String description; // required
+
+    public Project() {
+    }
 
     // creation an object of Project
     public Project(Long id, String name, String description) {
