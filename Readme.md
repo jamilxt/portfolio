@@ -36,7 +36,7 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
   - [ ] PostgreSQL
 - [x] Spring Profiles (local, dev, prod)
 - [ ] Deployment
-  - [x] Platform as-a Service (PaaS): Render
+  - [x] Platform as-a Service (PaaS): [Render](https://portfolio-6nv7.onrender.com/)
   - [ ] Infrastructure as-a-Service (IaaS): Virtual Machine
 
 ## How to Build & Run
