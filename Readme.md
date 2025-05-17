@@ -11,6 +11,9 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
     - [x] Dependency Injection
     - [x] Application Context
     - [x] Bean
+    - [x] DispatcherServlet
+    - [ ] Interceptor 
+    - [ ] Filter
 - [x] Server-Side (using Template Engine)
     - [x] / (Portfolio Homepage)
     - [ ] Practice Thymeleaf Tags
