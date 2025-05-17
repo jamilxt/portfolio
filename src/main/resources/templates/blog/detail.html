@@ -134,6 +134,29 @@
             color: #666;
             font-family: 'Courier New', Courier, monospace;
         }
+        /* SweetAlert2 custom styles */
+        .swal2-popup {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #fff;
+            border: 3px solid #000;
+            box-shadow: 6px 6px 0 #000;
+        }
+        .swal2-title {
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .swal2-confirm {
+            background-color: #00ffcc !important;
+            border: 2px solid #000 !important;
+            color: #000 !important;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 3px 3px 0 #000 !important;
+        }
+        .swal2-confirm:hover {
+            background-color: #00cc99 !important;
+        }
     </style>
 </head>
 <body>
@@ -210,8 +233,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // Log secure context status for debugging
+        console.log('Is secure context:', window.isSecureContext);
+        console.log('Navigator clipboard available:', !!navigator.clipboard);
+
         // Find all code blocks in the post content
         const codeBlocks = document.querySelectorAll('.post-content pre > code');
         codeBlocks.forEach((codeElement, index) => {
@@ -229,16 +257,128 @@
             copyButton.className = 'btn btn-copy';
             copyButton.textContent = 'Copy';
             copyButton.addEventListener('click', () => {
-                // Copy the code text to clipboard
-                const codeText = codeElement.innerText;
-                navigator.clipboard.write(codeText).then(() => {
-                    copyButton.textContent = 'Copied!';
-                    setTimeout(() => {
-                        copyButton.textContent = 'Copy';
-                    }, 2000);
-                }).catch(err => {
-                    console.error('Failed to copy code: ', err);
-                });
+                // Sanitize and copy the code text to clipboard
+                let codeText = codeElement.textContent || '';
+                codeText = codeText.trim(); // Remove leading/trailing whitespace
+                if (codeText && typeof codeText === 'string') {
+                    // Try modern Clipboard API
+                    if (navigator.clipboard && window.isSecureContext) {
+                        navigator.clipboard.write(codeText).then(() => {
+                            copyButton.textContent = 'Copied!';
+                            Swal.fire({
+                                title: 'Code copied to clipboard!',
+                                icon: 'success',
+                                timer: 2000,
+                                showConfirmButton: false,
+                                background: '#fff',
+                                customClass: {
+                                    popup: 'swal2-popup',
+                                    title: 'swal2-title',
+                                    confirmButton: 'swal2-confirm'
+                                }
+                            });
+                            setTimeout(() => {
+                                copyButton.textContent = 'Copy';
+                            }, 2000);
+                        }).catch(err => {
+                            console.error('Clipboard API failed:', err);
+                            console.log('Attempted to copy:', codeText);
+                            // Fallback to document.execCommand
+                            try {
+                                const textarea = document.createElement('textarea');
+                                textarea.value = codeText;
+                                document.body.appendChild(textarea);
+                                textarea.select();
+                                document.execCommand('copy');
+                                document.body.removeChild(textarea);
+                                copyButton.textContent = 'Copied!';
+                                Swal.fire({
+                                    title: 'Code copied to clipboard!',
+                                    icon: 'success',
+                                    timer: 2000,
+                                    showConfirmButton: false,
+                                    background: '#fff',
+                                    customClass: {
+                                        popup: 'swal2-popup',
+                                        title: 'swal2-title',
+                                        confirmButton: 'swal2-confirm'
+                                    }
+                                });
+                                setTimeout(() => {
+                                    copyButton.textContent = 'Copy';
+                                }, 2000);
+                            } catch (fallbackErr) {
+                                console.error('Fallback copy failed:', fallbackErr);
+                                Swal.fire({
+                                    title: 'Failed to copy code',
+                                    icon: 'error',
+                                    timer: 2000,
+                                    showConfirmButton: false,
+                                    background: '#fff',
+                                    customClass: {
+                                        popup: 'swal2-popup',
+                                        title: 'swal2-title',
+                                        confirmButton: 'swal2-confirm'
+                                    }
+                                });
+                            }
+                        });
+                    } else {
+                        // Fallback if Clipboard API is unavailable
+                        try {
+                            const textarea = document.createElement('textarea');
+                            textarea.value = codeText;
+                            document.body.appendChild(textarea);
+                            textarea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textarea);
+                            copyButton.textContent = 'Copied!';
+                            Swal.fire({
+                                title: 'Code copied to clipboard!',
+                                icon: 'success',
+                                timer: 2000,
+                                showConfirmButton: false,
+                                background: '#fff',
+                                customClass: {
+                                    popup: 'swal2-popup',
+                                    title: 'swal2-title',
+                                    confirmButton: 'swal2-confirm'
+                                }
+                            });
+                            setTimeout(() => {
+                                copyButton.textContent = 'Copy';
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Fallback copy failed:', err);
+                            Swal.fire({
+                                title: 'Failed to copy code',
+                                icon: 'error',
+                                timer: 2000,
+                                showConfirmButton: false,
+                                background: '#fff',
+                                customClass: {
+                                    popup: 'swal2-popup',
+                                    title: 'swal2-title',
+                                    confirmButton: 'swal2-confirm'
+                                }
+                            });
+                        }
+                    }
+                } else {
+                    console.error('Invalid code text:', codeText);
+                    Swal.fire({
+                        title: 'No code to copy',
+                        icon: 'error',
+                        timer: 2000,
+                        showConfirmButton: false,
+                        background: '#fff',
+                        customClass: {
+                            popup: 'swal2-popup',
+                            title: 'swal2-title',
+                            confirmButton: 'swal2-confirm'
+                        }
+                    });
+                }
             });
             codeHeader.appendChild(copyButton);
             preElement.parentNode.insertBefore(codeHeader, preElement);
