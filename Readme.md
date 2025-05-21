@@ -27,7 +27,13 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
 - [ ] Exception
   - [x] Custom Exception Class
   - [ ] Global Exception Handler
-- [ ] Logging
+- [x] Logging
+  - [x] Framework
+    - [x] Logback
+    - [x] Facade: SLF4J
+  - [x] Logging Levels
+  - [x] Configure Logging using application.properties
+  - [ ] Configure Logback using XML
 - [ ] External Service Call
 - [ ] Boilerplate Code Reduce
   - [ ] Mapper for Mapping
