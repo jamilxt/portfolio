@@ -16,17 +16,27 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
     - [ ] Filter
 - [x] Server-Side (using Template Engine)
     - [x] / (Portfolio Homepage)
-    - [ ] Practice Thymeleaf Tags
+    - [x] Practice Thymeleaf Tags (e.g. th:if, th:each, etc.)
 - [ ] REST API
     - [X] /api/projects (CRUD for Projects)
     - [ ] Secure Endpoints
     - [ ] Input Validation
     - [x] API Documentation: Swagger
     - [ ] API Paging and Sorting
+- [x] application.properties
+  - [x] @ConfigurationProperties
+  - [x] @Value
+  - [x] yaml/yml format
 - [ ] Exception
   - [x] Custom Exception Class
   - [ ] Global Exception Handler
-- [ ] Logging
+- [x] Logging
+  - [x] Framework
+    - [x] Logback
+    - [x] Facade: SLF4J
+  - [x] Logging Levels
+  - [x] Configure Logging using application.properties
+  - [ ] Configure Logback using XML
 - [ ] External Service Call
 - [ ] Boilerplate Code Reduce
   - [ ] Mapper for Mapping
