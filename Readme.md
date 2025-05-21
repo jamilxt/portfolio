@@ -20,6 +20,10 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
     - [ ] Input Validation
     - [x] API Documentation: Swagger
     - [ ] API Paging and Sorting
+- [ ] application.properties
+  - [x] @ConfigurationProperties
+  - [x] @Value
+  - [ ] yml format
 - [ ] Exception
   - [x] Custom Exception Class
   - [ ] Global Exception Handler
