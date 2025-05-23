@@ -35,16 +35,8 @@ public class ProjectRestController {
 
     @Operation(summary = "Get a project by id")
     @GetMapping("{id}")
-    public ResponseEntity<Project> getProject(@PathVariable Long id) {
-        Project project;
-        try {
-            project = projectService.getProjectById(id);
-        } catch (NotFoundException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
-
+    public ResponseEntity<Project> getProject(@PathVariable Long id) throws NotFoundException {
+        Project project = projectService.getProjectById(id);
         return ResponseEntity.ok(project);
     }
 
