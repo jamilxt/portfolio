@@ -42,25 +42,13 @@ public class ProjectRestController {
 
     @Operation(summary = "Update a project by id")
     @PutMapping("{id}")
-    public void updateProject(@PathVariable Long id, @RequestBody UpdateProjectRequest request) {
-        try {
+    public void updateProject(@PathVariable Long id, @RequestBody UpdateProjectRequest request) throws NotFoundException {
             projectService.updateProject(id, request);
-        } catch (NotFoundException e) {
-            ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            ResponseEntity.internalServerError().build();
-        }
     }
 
     @Operation(summary = "Delete a project by id")
     @DeleteMapping("{id}")
-    public void deleteProject(@PathVariable Long id) {
-        try {
+    public void deleteProject(@PathVariable Long id) throws NotFoundException {
             projectService.deleteProject(id);
-        } catch (NotFoundException e) {
-            ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            ResponseEntity.internalServerError().build();
-        }
     }
 }
