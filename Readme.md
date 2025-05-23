@@ -42,19 +42,80 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
   - [x] Configure Logging using application.properties
   - [ ] Configure Logback using XML
 - [ ] External Service Call
+  - [ ] RestTemplate
+  - [ ] WebClient
+  - [ ] Feign Client
 - [ ] Boilerplate Code Reduce
   - [ ] Mapper for Mapping
   - [ ] Lombok for Generating Getters and Setters
 - [ ] Spring Security
-  - [ ] Basic Auth
-  - [ ] JWT
+  - [ ] Authentication
+    - [ ] Form-Based Authentication
+    - [ ] Basic Authentication
+    - [ ] JWT (JSON Web Token)
+    - [ ] OAuth2
+  - [ ] Authorization
+    - [ ] Role-Based Access Control (RBAC)
+  - [ ] CSRF Protection
+  - [ ] CORS
+  - [ ] Session Management
+  - [ ] Password Encoding
 - [ ] Database
-  - [x] H2 (In-Memory Database)
-  - [ ] PostgreSQL
+    - [ ] Database System
+      - [x] H2 (In-Memory Database, Embedded)
+      - [ ] PostgreSQL
+    - [ ] DB Initialization & Migration
+      - [ ] Spring Boot Database Initialization
+        - [ ] Schema.sql
+        - [ ] Data.sql
+        - [ ] hibernate.hbm2ddl.auto
+      - [ ] DB Migration
+        - [ ] Flyway
+        - [ ] Liquibase
+- [ ] ORM
+  - [ ] Hibernate
+  - [ ] JPA (Java Persistence API)
+- [ ] Spring Data
+  - [ ] Spring Data JPA
+  - [ ] Spring Data JDBC
+  - [ ] Spring Data MongoDB
+  - [ ] Spring Data Redis
 - [x] Spring Profiles (local, dev, prod)
+- [ ] Spring Data JPA
+  - [x] @Entity
+  - [ ] @Table
+  - [x] @Id
+  - [x] @GeneratedValue
+  - [ ] @Column
+  - [ ] @OneToMany
+  - [ ] @ManyToOne
+  - [ ] @ManyToMany
+  - [ ] @Transactional
+- [ ] Spring Data JPA Query
+  - [ ] @Query
+  - [ ] Native Query
+  - [ ] Named Query
+  - [ ] Criteria API
+  - [ ] Spring Data JPA Specification
+- [ ] Spring Actuator
+  - [ ] Health Check
+  - [ ] Metrics
+  - [ ] Info
+  - [ ] Custom Endpoints
 - [ ] Deployment
   - [x] Platform as-a Service (PaaS): [Render](https://portfolio-6nv7.onrender.com/)
   - [ ] Infrastructure as-a-Service (IaaS): Virtual Machine
+- [ ] Good/Best Practices
+  - [ ] Code Quality
+    - [ ] SonarQube
+    - [ ] SonarCloud
+  - [ ] Code Review
+  - [ ] Unit Testing
+    - [ ] JUnit 5
+    - [ ] Mockito
+  - [ ] Integration Testing
+    - [ ] Spring Test
+    - [ ] Testcontainers
 
 ## How to Build & Run
 1. Install Java 17 (LTS) of any distribution. You can try Amazon Corretto 17. You can find the installation instructions here: https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/what-is-corretto-17.html
