@@ -27,9 +27,13 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
   - [x] @ConfigurationProperties
   - [x] @Value
   - [x] yaml/yml format
-- [ ] Exception
+- [x] Exception
   - [x] Custom Exception Class
-  - [ ] Global Exception Handler
+  - [x] Global Exception Handler
+    - [x] @RestControllerAdvice
+    - [x] Problem Details RFC 7807
+    - [x] @ExceptionHandler
+    - [ ] @ControllerAdvice
 - [x] Logging
   - [x] Framework
     - [x] Logback
