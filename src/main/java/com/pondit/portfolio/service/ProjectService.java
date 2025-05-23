@@ -1,6 +1,6 @@
 package com.pondit.portfolio.service;
 
-import com.pondit.portfolio.exception.NotFoundException;
+import com.pondit.portfolio.exception.custom.NotFoundException;
 import com.pondit.portfolio.model.domain.Project;
 import com.pondit.portfolio.model.dto.CreateProjectRequest;
 import com.pondit.portfolio.model.dto.UpdateProjectRequest;

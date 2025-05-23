@@ -1,6 +1,6 @@
 package com.pondit.portfolio.controller.rest;
 
-import com.pondit.portfolio.exception.NotFoundException;
+import com.pondit.portfolio.exception.custom.NotFoundException;
 import com.pondit.portfolio.model.domain.Project;
 import com.pondit.portfolio.model.dto.CreateProjectRequest;
 import com.pondit.portfolio.model.dto.UpdateProjectRequest;
@@ -35,40 +35,20 @@ public class ProjectRestController {
 
     @Operation(summary = "Get a project by id")
     @GetMapping("{id}")
-    public ResponseEntity<Project> getProject(@PathVariable Long id) {
-        Project project;
-        try {
-            project = projectService.getProjectById(id);
-        } catch (NotFoundException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
-
+    public ResponseEntity<Project> getProject(@PathVariable Long id) throws NotFoundException {
+        Project project = projectService.getProjectById(id);
         return ResponseEntity.ok(project);
     }
 
     @Operation(summary = "Update a project by id")
     @PutMapping("{id}")
-    public void updateProject(@PathVariable Long id, @RequestBody UpdateProjectRequest request) {
-        try {
+    public void updateProject(@PathVariable Long id, @RequestBody UpdateProjectRequest request) throws NotFoundException {
             projectService.updateProject(id, request);
-        } catch (NotFoundException e) {
-            ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            ResponseEntity.internalServerError().build();
-        }
     }
 
     @Operation(summary = "Delete a project by id")
     @DeleteMapping("{id}")
-    public void deleteProject(@PathVariable Long id) {
-        try {
+    public void deleteProject(@PathVariable Long id) throws NotFoundException {
             projectService.deleteProject(id);
-        } catch (NotFoundException e) {
-            ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            ResponseEntity.internalServerError().build();
-        }
     }
 }
