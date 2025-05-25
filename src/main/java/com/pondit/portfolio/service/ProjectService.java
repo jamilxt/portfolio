@@ -2,7 +2,7 @@ package com.pondit.portfolio.service;
 
 import com.pondit.portfolio.exception.custom.NotFoundException;
 import com.pondit.portfolio.model.domain.Project;
-import com.pondit.portfolio.model.dto.CreateProjectRequestRecord;
+import com.pondit.portfolio.model.dto.CreateProjectRequest;
 import com.pondit.portfolio.model.dto.UpdateProjectRequest;
 import com.pondit.portfolio.persistence.entity.ProjectEntity;
 import com.pondit.portfolio.persistence.repository.ProjectRepository;
@@ -27,7 +27,7 @@ public class ProjectService {
         }).toList();
     }
 
-    public Project createProject(CreateProjectRequestRecord request) {
+    public Project createProject(CreateProjectRequest request) {
         // request
         String name = request.name();
         String description = request.description();
@@ -65,7 +65,7 @@ public class ProjectService {
 
     public void updateProject(Long id, UpdateProjectRequest request) throws NotFoundException {
         // request
-        String description = request.getDescription();
+        String description = request.description();
 
         // query existing project
         Optional<ProjectEntity> projectEntityOptional = projectRepository.findById(id);
