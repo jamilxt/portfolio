@@ -47,7 +47,11 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
   - [ ] Feign Client
 - [ ] Boilerplate Code Reduce
   - [ ] Mapper for Mapping
-  - [ ] Lombok for Generating Getters and Setters
+    - [ ] Native from Spring: BeanUtils
+    - [ ] 3rd Party Libraries
+      - [ ] MapStruct
+      - [ ] ModelMapper
+  - [x] Lombok for Generating Getters and Setters
 - [ ] Spring Security
   - [ ] Authentication
     - [ ] Form-Based Authentication
