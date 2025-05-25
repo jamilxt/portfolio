@@ -2,7 +2,7 @@ package com.pondit.portfolio.controller.rest;
 
 import com.pondit.portfolio.exception.custom.NotFoundException;
 import com.pondit.portfolio.model.domain.Project;
-import com.pondit.portfolio.model.dto.CreateProjectRequest;
+import com.pondit.portfolio.model.dto.CreateProjectRequestRecord;
 import com.pondit.portfolio.model.dto.UpdateProjectRequest;
 import com.pondit.portfolio.service.ProjectService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,7 +28,7 @@ public class ProjectRestController {
 
     @Operation(summary = "Create a new project")
     @PostMapping
-    public Project createProject(@RequestBody CreateProjectRequest request) {
+    public Project createProject(@RequestBody CreateProjectRequestRecord request) {
         // TODO: validate input
         return projectService.createProject(request);
     }
