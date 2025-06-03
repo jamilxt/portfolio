@@ -22,7 +22,7 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
     - [ ] Secure Endpoints
     - [ ] Input Validation
     - [x] API Documentation: Swagger
-    - [ ] API Paging and Sorting
+    - [x] API Paging and Sorting
 - [x] application.properties
   - [x] @ConfigurationProperties
   - [x] @Value
@@ -72,7 +72,7 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
       - [ ] Spring Boot Database Initialization
         - [ ] Schema.sql
         - [ ] Data.sql
-        - [ ] hibernate.hbm2ddl.auto
+        - [x] hibernate.hbm2ddl.auto
       - [ ] DB Migration
         - [ ] Flyway
         - [ ] Liquibase
