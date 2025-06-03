@@ -22,7 +22,7 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
     - [ ] Secure Endpoints
     - [ ] Input Validation
     - [x] API Documentation: Swagger
-    - [ ] API Paging and Sorting
+    - [x] API Paging and Sorting
 - [x] application.properties
   - [x] @ConfigurationProperties
   - [x] @Value
