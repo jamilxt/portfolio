@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Details - Neubrutalist Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f5f5f5;
+            color: #000;
+        }
+        .neubrutalist-header {
+            background-color: #ff0077;
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0 #000;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+        .neubrutalist-card {
+            border: 3px solid #000;
+            box-shadow: 6px 6px 0 #000;
+            background-color: #fff;
+            margin-bottom: 2rem;
+            transition: transform 0.2s;
+        }
+        .neubrutalist-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 10px 10px 0 #000;
+        }
+        .sidebar {
+            border: 3px solid #000;
+            box-shadow: 4px 4px 0 #000;
+            background-color: #fff;
+            padding: 1rem;
+            position: sticky;
+            top: 20px;
+        }
+        .btn-neubrutalist {
+            background-color: #00ffcc;
+            border: 2px solid #000;
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            box-shadow: 4px 4px 0 #000;
+        }
+        .btn-neubrutalist:hover {
+            background-color: #00cc99;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #000;
+        }
+        .btn-copy {
+            background-color: #fff;
+            border: 2px solid #000;
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 0.25rem 0.75rem;
+            box-shadow: 3px 3px 0 #000;
+        }
+        .btn-copy:hover {
+            background-color: #00ffcc;
+            box-shadow: 5px 5px 0 #000;
+        }
+        h1, h2, h3, h4 {
+            ross: 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .post-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        .post-content {
+            line-height: 1.6;
+        }
+        .comment-section {
+            margin-top: 2rem;
+        }
+        .comment-item {
+            border: 2px solid #000;
+            background-color: #fff;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 4px 4px 0 #000;
+        }
+        pre {
+            background-color: #f8f8f8;
+            border: 2px solid #000;
+            box-shadow: 3px 3px 0 #000;
+            padding: 1rem;
+            position: relative;
+            overflow-x: auto;
+        }
+        .code-header {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 0.5rem;
+        }
+        @media (max-width: 767.98px) {
+            .sidebar {
+                position: static;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="neubrutalist-header">
+    <div class="container">
+        <h1 class="display-4">Post Details</h1>
+        <p class="lead">Raw thoughts, unfiltered vibes</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Post Content -->
+            <div class="neubrutalist-card p-4">
+                <h2>Exploring Java Concurrency with Thread Pools</h2>
+                <p class="post-meta">Posted on May 17, 2025 by Author</p>
+                <div class="post-content">
+                    <h3>Why Java Concurrency Matters</h3>
+                    <p>Java’s concurrency utilities, introduced in **Java 5**, provide robust tools for managing multi-threaded applications. Thread pools, in particular, are essential for optimizing resource usage and improving performance in applications with multiple tasks.</p>
+
+                    <h4>Key Benefits of Thread Pools:</h4>
+                    <ul>
+                        <li>**Resource Management**: Reuses threads to reduce overhead.</li>
+                        <li>**Scalability**: Handles large numbers of tasks efficiently.</li>
+                        <li>**Simplified Control**: Manages thread lifecycle automatically.</li>
+                    </ul>
+
+                    <p>Below is an example of using a **ThreadPoolExecutor** to process tasks concurrently. This code demonstrates creating a thread pool and submitting tasks to it. <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ThreadPoolExecutor.html" class="text-dark">Learn more in the official Java documentation</a>.</p>
+
+                    <div class="code-header">
+                        <button class="btn btn-copy" onclick="copyCode()">Copy</button>
+                    </div>
+
+                    <h4>How It Works:</h4>
+                    <ol>
+                        <li><strong>ThreadPoolExecutor Creation</strong>: Configures a pool with a core size of 2 and a maximum of 4 threads.</li>
+                        <li><strong>Task Submission</strong>: Submits 5 tasks, which are executed by available threads.</li>
+                        <li><strong>Shutdown</strong>: Gracefully stops the executor after tasks are complete.</li>
+                    </ol>
+
+                    <p>This is a basic example. For production, consider tuning parameters like queue size and rejection policies based on your application’s needs.</p>
+                </div>
+                <a href="/" class="btn btn-neubrutalist mt-3">Back to Home</a>
+            </div>
+            <!-- Comment Section -->
+            <div class="neubrutalist-card p-4 comment-section">
+                <h3>Comments</h3>
+                <div class="comment-item">
+                    <p><strong>Jane Doe</strong> | May 17, 2025</p>
+                    <p>Great explanation of thread pools! The example was super clear.</p>
+                </div>
+                <div class="comment-item">
+                    <p><strong>John Smith</strong> | May 17, 2025</p>
+                    <p>Thanks for the Java concurrency insights!</p>
+                </div>
+                <h4>Leave a Comment</h4>
+                <form>
+                    <div class="mb-3">
+                        <label for="comment-name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="comment-name" placeholder="Your name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="comment-text" class="form-label">Comment</label>
+                        <textarea class="form-control" id="comment-text" rows="4" placeholder="Your comment"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-neubrutalist">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="sidebar">
+                <h3>Navigation</h3>
+                <ul class="list-unstyled">
+                    <li><a href="/" class="text-dark">Home</a></li>
+                    <li><a href="/resume" class="text-dark">Resume</a></li>
+                    <li><a href="/#contact" class="text-dark">Contact</a></li>
+                </ul>
+                <h3>Subscribe</h3>
+                <form>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="Email address" aria-label="Email">
+                    </div>
+                    <button type="submit" class="btn btn-neubrutalist">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="neubrutalist-header py-3 mt-5">
+    <div class="container text-center">
+        <p>© 2025 My Neubrutalist Blog. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+    function copyCode() {
+        const code = document.querySelector('pre code').innerText;
+        navigator.clipboard.write(code).then(() => {
+            alert('Code copied to clipboard!');
+        }).catch(err => {
+            console.error('Failed to copy code: ', err);
+        });
+    }
+</script>
+</body>
+</html>
