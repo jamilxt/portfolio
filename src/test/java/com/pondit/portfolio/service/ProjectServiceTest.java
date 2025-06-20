@@ -1,6 +1,7 @@
 package com.pondit.portfolio.service;
 
 import com.pondit.portfolio.exception.custom.NotFoundException;
+import com.pondit.portfolio.mapper.ProjectMapper;
 import com.pondit.portfolio.model.domain.Project;
 import com.pondit.portfolio.persistence.entity.ProjectEntity;
 import com.pondit.portfolio.persistence.repository.ProjectRepository;
@@ -35,6 +36,7 @@ class ProjectServiceTest {
         projectEntity.setId(expectedId);
         projectEntity.setName("Test Project");
         projectEntity.setDescription("Test Description");
+
         when(projectRepository.findById(expectedId)).thenReturn(Optional.of(projectEntity));
 
         // when
