@@ -54,13 +54,8 @@ public class ProjectService {
 
         // query on database
         ProjectEntity projectEntity = projectEntityOptional.get();
-        Long entityId = projectEntity.getId();
-        String entityName = projectEntity.getName();
-        String entityDescription = projectEntity.getDescription();
-
-
-        // map entity to domain object
-        Project project = new Project(entityId, entityName, entityDescription);
+        Project project = new Project();
+        BeanUtils.copyProperties(projectEntity, project);
         return project;
     }
 
