@@ -51,7 +51,7 @@ public class ProjectService {
     }
 
     public Project getProjectById(Long id) throws NotFoundException {
-        ProjectEntity projectEntity = projectRepository.findById(id)
+        var projectEntity = projectRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Project not found"));
         return projectMapper.entityToDomain(projectEntity);
     }
