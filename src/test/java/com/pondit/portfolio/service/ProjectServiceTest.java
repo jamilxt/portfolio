@@ -23,6 +23,9 @@ class ProjectServiceTest {
     @Mock
     private ProjectRepository projectRepository;
 
+    @Mock
+    private ProjectMapper projectMapper;
+
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
@@ -38,6 +41,8 @@ class ProjectServiceTest {
         projectEntity.setDescription("Test Description");
 
         when(projectRepository.findById(expectedId)).thenReturn(Optional.of(projectEntity));
+        when(projectMapper.entityToDomain(projectEntity)).
+                thenReturn(new Project(expectedId, "Test Project", "Test Description"));
 
         // when
         Project project = projectService.getProjectById(expectedId);
