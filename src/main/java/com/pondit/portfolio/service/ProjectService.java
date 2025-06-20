@@ -1,6 +1,7 @@
 package com.pondit.portfolio.service;
 
 import com.pondit.portfolio.exception.custom.NotFoundException;
+import com.pondit.portfolio.mapper.ProjectMapper;
 import com.pondit.portfolio.model.domain.Project;
 import com.pondit.portfolio.model.dto.CreateProjectRequest;
 import com.pondit.portfolio.model.dto.UpdateProjectRequest;
@@ -18,6 +19,9 @@ import java.util.Optional;
 public class ProjectService {
     @Autowired
     ProjectRepository projectRepository;
+
+    @Autowired
+    ProjectMapper projectMapper;
 
     public List<Project> getAllProjects(Pageable pageable) {
         List<ProjectEntity> entityList = projectRepository.findAll(pageable).getContent();
@@ -47,21 +51,9 @@ public class ProjectService {
     }
 
     public Project getProjectById(Long id) throws NotFoundException {
-        Optional<ProjectEntity> projectEntityOptional = projectRepository.findById(id);
-        if (projectEntityOptional.isEmpty()) {
-            throw new NotFoundException("Project not found"); // bad practice
-        }
-
-        // query on database
-        ProjectEntity projectEntity = projectEntityOptional.get();
-        Long entityId = projectEntity.getId();
-        String entityName = projectEntity.getName();
-        String entityDescription = projectEntity.getDescription();
-
-
-        // map entity to domain object
-        Project project = new Project(entityId, entityName, entityDescription);
-        return project;
+        var projectEntity = projectRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Project not found"));
+        return projectMapper.entityToDomain(projectEntity);
     }
 
     public void updateProject(Long id, UpdateProjectRequest request) throws NotFoundException {

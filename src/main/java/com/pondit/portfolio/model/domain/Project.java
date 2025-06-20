@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Project {
-    private Long id;
+    private Long id; // 1
     private String name; // required
     private String description; // required
 }
