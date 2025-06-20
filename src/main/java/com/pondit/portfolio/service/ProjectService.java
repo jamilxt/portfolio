@@ -51,11 +51,9 @@ public class ProjectService {
     }
 
     public Project getProjectById(Long id) throws NotFoundException {
-        Optional<ProjectEntity> projectEntityOptional = projectRepository.findById(id);
-        if (projectEntityOptional.isEmpty()) {
-            throw new NotFoundException("Project not found"); // bad practice
-        }
-        return projectMapper.entityToDomain(projectEntityOptional.get());
+        ProjectEntity projectEntity = projectRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Project not found"));
+        return projectMapper.entityToDomain(projectEntity);
     }
 
     public void updateProject(Long id, UpdateProjectRequest request) throws NotFoundException {
