@@ -17,11 +17,15 @@ import java.util.Optional;
 
 @Service
 public class ProjectService {
-    @Autowired
-    ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
+    private ProjectMapper projectMapper;
 
     @Autowired
-    ProjectMapper projectMapper;
+    public ProjectService(ProjectRepository projectRepository,
+                          ProjectMapper projectMapper) {
+        this.projectRepository = projectRepository;
+        this.projectMapper = projectMapper;
+    }
 
     public List<Project> getAllProjects(Pageable pageable) {
         List<ProjectEntity> entityList = projectRepository.findAll(pageable).getContent();
