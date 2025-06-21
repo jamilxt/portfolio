@@ -23,9 +23,7 @@ public class ProjectService {
 
     public List<Project> getAllProjects(Pageable pageable) {
         List<ProjectEntity> entityList = projectRepository.findAll(pageable).getContent();
-        return entityList.stream().map(entity -> {
-            return projectMapper.entityToDomain(entity);
-        }).toList();
+        return entityList.stream().map(projectMapper::entityToDomain).toList();
     }
 
     public Project createProject(CreateProjectRequest request) {
