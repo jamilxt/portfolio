@@ -11,7 +11,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
@@ -26,6 +29,40 @@ class ProjectServiceTest {
 
     @Mock
     private ProjectMapper projectMapper;
+
+    @Test
+    void getAllProjects_returns_project_list() {
+        // given
+        Pageable pageable = Pageable.unpaged();
+        ProjectEntity entity1 = new ProjectEntity();
+        entity1.setId(1L);
+        entity1.setName("Project 1");
+        entity1.setDescription("Description 1");
+
+        ProjectEntity entity2 = new ProjectEntity();
+        entity2.setId(2L);
+        entity2.setName("Project 2");
+        entity2.setDescription("Description 2");
+
+        List<ProjectEntity> entities = List.of(entity1, entity2);
+
+        // Mock the repository to return a Page with the entities
+        when(projectRepository.findAll(pageable)).thenReturn(new PageImpl<>(entities));
+        when(projectMapper.entityToDomain(entity1)).thenReturn(new Project(1L, "Project 1", "Description 1"));
+        when(projectMapper.entityToDomain(entity2)).thenReturn(new Project(2L, "Project 2", "Description 2"));
+
+        // when
+        List<Project> result = projectService.getAllProjects(pageable);
+
+        // then
+        Assertions.assertEquals(2, result.size());
+        Assertions.assertEquals(1L, result.get(0).getId());
+        Assertions.assertEquals("Project 1", result.get(0).getName());
+        Assertions.assertEquals("Description 1", result.get(0).getDescription());
+        Assertions.assertEquals(2L, result.get(1).getId());
+        Assertions.assertEquals("Project 2", result.get(1).getName());
+        Assertions.assertEquals("Description 2", result.get(1).getDescription());
+    }
 
     @Test
     void given_valid_id_return_a_project() throws NotFoundException {
