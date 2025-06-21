@@ -30,9 +30,9 @@ public class ProjectRestController {
 
     @Operation(summary = "Create a new project")
     @PostMapping
-    public Project createProject(@RequestBody CreateProjectRequest request) {
+    public void createProject(@RequestBody CreateProjectRequest request) {
         // TODO: validate input
-        return projectService.createProject(request);
+        projectService.createProject(request);
     }
 
     @Operation(summary = "Get a project by id")

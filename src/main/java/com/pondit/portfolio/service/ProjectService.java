@@ -25,22 +25,10 @@ public class ProjectService {
         return entityList.stream().map(projectMapper::entityToDomain).toList();
     }
 
-    public Project createProject(CreateProjectRequest request) {
-        // request
-        String name = request.name();
-        String description = request.description();
-
-        // save to database
-        ProjectEntity entity = new ProjectEntity();
-        entity.setName(name);
-        entity.setDescription(description);
-        ProjectEntity savedEntity = projectRepository.save(entity); // create operation
-
-        // map entity to domain object
-        Long savedEntityId = savedEntity.getId();
-        String savedEntityName = savedEntity.getName();
-        String savedEntityDescription = savedEntity.getDescription();
-        return new Project(savedEntityId, savedEntityName, savedEntityDescription);
+    public Long createProject(CreateProjectRequest request) {
+        var entityToSave = projectMapper.createRequestToEntity(request);
+        var savedEntity = projectRepository.save(entityToSave);
+        return savedEntity.getId();
     }
 
     /**
