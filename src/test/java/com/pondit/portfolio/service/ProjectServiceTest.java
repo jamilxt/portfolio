@@ -135,14 +135,18 @@ class ProjectServiceTest {
         existingEntity.setName("Test Project");
         existingEntity.setDescription("Old Description");
 
+        ProjectEntity updatedEntity = new ProjectEntity();
+        existingEntity.setDescription(newDescription);
+
         when(projectRepository.findById(projectId)).thenReturn(Optional.of(existingEntity));
+        when(projectMapper.updateRequestToEntity(request, existingEntity)).thenReturn(updatedEntity);
 
         // when
         projectService.updateProject(projectId, request);
 
         // then
         Assertions.assertEquals(newDescription, existingEntity.getDescription());
-        Mockito.verify(projectRepository).save(existingEntity);
+        Mockito.verify(projectRepository).save(updatedEntity);
     }
 
     @Test
