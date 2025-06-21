@@ -7,79 +7,47 @@ import com.pondit.portfolio.model.dto.CreateProjectRequest;
 import com.pondit.portfolio.model.dto.UpdateProjectRequest;
 import com.pondit.portfolio.persistence.entity.ProjectEntity;
 import com.pondit.portfolio.persistence.repository.ProjectRepository;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class ProjectService {
-    @Autowired
-    ProjectRepository projectRepository;
+    private final ProjectRepository projectRepository;
+    private final ProjectMapper projectMapper;
 
-    @Autowired
-    ProjectMapper projectMapper;
-
-    public List<Project> getAllProjects(Pageable pageable) {
+    public List<Project> getAll(Pageable pageable) {
         List<ProjectEntity> entityList = projectRepository.findAll(pageable).getContent();
-        return entityList.stream().map(entity -> {
-            Project domain = new Project();
-            BeanUtils.copyProperties(entity, domain);
-            return domain;
-        }).toList();
+        return entityList.stream().map(projectMapper::entityToDomain).toList();
     }
 
-    public Project createProject(CreateProjectRequest request) {
-        // request
-        String name = request.name();
-        String description = request.description();
-
-        // save to database
-        ProjectEntity entity = new ProjectEntity();
-        entity.setName(name);
-        entity.setDescription(description);
-        ProjectEntity savedEntity = projectRepository.save(entity); // create operation
-
-        // map entity to domain object
-        Long savedEntityId = savedEntity.getId();
-        String savedEntityName = savedEntity.getName();
-        String savedEntityDescription = savedEntity.getDescription();
-        return new Project(savedEntityId, savedEntityName, savedEntityDescription);
+    public Long create(CreateProjectRequest request) {
+        var entityToSave = projectMapper.createRequestToEntity(request);
+        var savedEntity = projectRepository.save(entityToSave);
+        return savedEntity.getId();
     }
 
-    public Project getProjectById(Long id) throws NotFoundException {
-        var projectEntity = projectRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Project not found"));
+    public Project getById(Long id) throws NotFoundException {
+        var projectEntity = this.findEntityById(id);
         return projectMapper.entityToDomain(projectEntity);
     }
 
-    public void updateProject(Long id, UpdateProjectRequest request) throws NotFoundException {
-        // request
-        String description = request.description();
-
-        // query existing project
-        Optional<ProjectEntity> projectEntityOptional = projectRepository.findById(id);
-        if (projectEntityOptional.isEmpty()) {
-            throw new NotFoundException("Project not found");
-        }
-
-        // save to database
-        ProjectEntity projectEntity = projectEntityOptional.get();
-        projectEntity.setDescription(description);
-        projectRepository.save(projectEntity);
+    public void update(Long id, UpdateProjectRequest request) throws NotFoundException {
+        var projectEntity = this.findEntityById(id);
+        var updatedProjectEntity = projectMapper.updateRequestToEntity(request, projectEntity);
+        projectRepository.save(updatedProjectEntity);
     }
 
-    public void deleteProject(Long id) throws NotFoundException {
-        // query existing project
-        Optional<ProjectEntity> projectEntityOptional = projectRepository.findById(id);
-        if (projectEntityOptional.isEmpty()) {
-            throw new NotFoundException("Project not found");
-        }
-
-        // delete from database
+    public void delete(Long id) throws NotFoundException {
+        this.findEntityById(id);
         projectRepository.deleteById(id);
+    }
+
+    private ProjectEntity findEntityById(Long id) throws NotFoundException {
+        return projectRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Project not found"));
     }
 }

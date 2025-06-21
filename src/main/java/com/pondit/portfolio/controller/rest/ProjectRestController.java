@@ -25,32 +25,32 @@ public class ProjectRestController {
     @Operation(summary = "Get all projects")
     @GetMapping
     public List<Project> getAllProjects(@ParameterObject Pageable pageable) {
-        return projectService.getAllProjects(pageable);
+        return projectService.getAll(pageable);
     }
 
     @Operation(summary = "Create a new project")
     @PostMapping
-    public Project createProject(@RequestBody CreateProjectRequest request) {
+    public void createProject(@RequestBody CreateProjectRequest request) {
         // TODO: validate input
-        return projectService.createProject(request);
+        projectService.create(request);
     }
 
     @Operation(summary = "Get a project by id")
     @GetMapping("{id}")
     public ResponseEntity<Project> getProject(@PathVariable Long id) throws NotFoundException {
-        Project project = projectService.getProjectById(id);
+        Project project = projectService.getById(id);
         return ResponseEntity.ok(project);
     }
 
     @Operation(summary = "Update a project by id")
     @PutMapping("{id}")
     public void updateProject(@PathVariable Long id, @RequestBody UpdateProjectRequest request) throws NotFoundException {
-            projectService.updateProject(id, request);
+            projectService.update(id, request);
     }
 
     @Operation(summary = "Delete a project by id")
     @DeleteMapping("{id}")
     public void deleteProject(@PathVariable Long id) throws NotFoundException {
-            projectService.deleteProject(id);
+            projectService.delete(id);
     }
 }

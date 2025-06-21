@@ -35,7 +35,7 @@ public class ResumeController {
         model.addAttribute("education", resumeConfig.getEducation());
         model.addAttribute("experience", resumeConfig.getExperience());
         model.addAttribute("skills", resumeConfig.getSkills());
-        model.addAttribute("projects", projectService.getAllProjects(Pageable.unpaged()));
+        model.addAttribute("projects", projectService.getAll(Pageable.unpaged()));
         log.debug("Rendering index page");
         return "resume/index";
     }
