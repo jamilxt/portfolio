@@ -52,13 +52,8 @@ public class ProjectService {
     }
 
     public void deleteProject(Long id) throws NotFoundException {
-        // query existing project
-        Optional<ProjectEntity> projectEntityOptional = projectRepository.findById(id);
-        if (projectEntityOptional.isEmpty()) {
-            throw new NotFoundException("Project not found");
-        }
-
-        // delete from database
+        projectRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Project not found"));
         projectRepository.deleteById(id);
     }
 }
