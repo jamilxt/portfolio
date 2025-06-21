@@ -31,18 +31,18 @@ public class ProjectService {
     }
 
     public Project getProjectById(Long id) throws NotFoundException {
-        var projectEntity = findEntityById(id);
+        var projectEntity = this.findEntityById(id);
         return projectMapper.entityToDomain(projectEntity);
     }
 
     public void updateProject(Long id, UpdateProjectRequest request) throws NotFoundException {
-        var projectEntity = findEntityById(id);
+        var projectEntity = this.findEntityById(id);
         var updatedProjectEntity = projectMapper.updateRequestToEntity(request, projectEntity);
         projectRepository.save(updatedProjectEntity);
     }
 
     public void deleteProject(Long id) throws NotFoundException {
-        findEntityById(id);
+        this.findEntityById(id);
         projectRepository.deleteById(id);
     }
 
