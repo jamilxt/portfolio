@@ -45,19 +45,10 @@ public class ProjectService {
     }
 
     public void updateProject(Long id, UpdateProjectRequest request) throws NotFoundException {
-        // request
-        String description = request.description();
-
-        // query existing project
-        Optional<ProjectEntity> projectEntityOptional = projectRepository.findById(id);
-        if (projectEntityOptional.isEmpty()) {
-            throw new NotFoundException("Project not found");
-        }
-
-        // save to database
-        ProjectEntity projectEntity = projectEntityOptional.get();
-        projectEntity.setDescription(description);
-        projectRepository.save(projectEntity);
+        var projectEntity = projectRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Project not found"));
+        var updatedProjectEntity = projectMapper.updateRequestToEntity(request, projectEntity);
+        projectRepository.save(updatedProjectEntity);
     }
 
     public void deleteProject(Long id) throws NotFoundException {
