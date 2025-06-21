@@ -30,13 +30,6 @@ public class ProjectService {
         return savedEntity.getId();
     }
 
-    /**
-     * Retrieves a project by its ID.
-     *
-     * @param id the ID of the project to retrieve
-     * @return the project domain object
-     * @throws NotFoundException if the project with the specified ID is not found
-     */
     public Project getProjectById(Long id) throws NotFoundException {
         var projectEntity = findEntityById(id);
         return projectMapper.entityToDomain(projectEntity);
