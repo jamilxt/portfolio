@@ -8,7 +8,6 @@ import com.pondit.portfolio.model.dto.UpdateProjectRequest;
 import com.pondit.portfolio.persistence.entity.ProjectEntity;
 import com.pondit.portfolio.persistence.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
