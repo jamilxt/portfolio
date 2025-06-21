@@ -19,29 +19,29 @@ public class ProjectService {
     private final ProjectRepository projectRepository;
     private final ProjectMapper projectMapper;
 
-    public List<Project> getAllProjects(Pageable pageable) {
+    public List<Project> getAll(Pageable pageable) {
         List<ProjectEntity> entityList = projectRepository.findAll(pageable).getContent();
         return entityList.stream().map(projectMapper::entityToDomain).toList();
     }
 
-    public Long createProject(CreateProjectRequest request) {
+    public Long create(CreateProjectRequest request) {
         var entityToSave = projectMapper.createRequestToEntity(request);
         var savedEntity = projectRepository.save(entityToSave);
         return savedEntity.getId();
     }
 
-    public Project getProjectById(Long id) throws NotFoundException {
+    public Project getById(Long id) throws NotFoundException {
         var projectEntity = this.findEntityById(id);
         return projectMapper.entityToDomain(projectEntity);
     }
 
-    public void updateProject(Long id, UpdateProjectRequest request) throws NotFoundException {
+    public void update(Long id, UpdateProjectRequest request) throws NotFoundException {
         var projectEntity = this.findEntityById(id);
         var updatedProjectEntity = projectMapper.updateRequestToEntity(request, projectEntity);
         projectRepository.save(updatedProjectEntity);
     }
 
-    public void deleteProject(Long id) throws NotFoundException {
+    public void delete(Long id) throws NotFoundException {
         this.findEntityById(id);
         projectRepository.deleteById(id);
     }

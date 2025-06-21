@@ -35,7 +35,7 @@ class ProjectServiceTest {
     private ProjectMapper projectMapper;
 
     @Test
-    void getAllProjects_returns_project_list() {
+    void getAll_returns_project_list() {
         // given
         Pageable pageable = Pageable.unpaged();
         ProjectEntity entity1 = new ProjectEntity();
@@ -56,7 +56,7 @@ class ProjectServiceTest {
         when(projectMapper.entityToDomain(entity2)).thenReturn(new Project(2L, "Project 2", "Description 2"));
 
         // when
-        List<Project> result = projectService.getAllProjects(pageable);
+        List<Project> result = projectService.getAll(pageable);
 
         // then
         Assertions.assertEquals(2, result.size());
@@ -69,7 +69,7 @@ class ProjectServiceTest {
     }
 
     @Test
-    void createProject_saves_and_returns_project() {
+    void createProject_saves_and_returns_() {
         // given
         CreateProjectRequest request = new CreateProjectRequest("New Project", "New Description");
         ProjectEntity entityToSave = new ProjectEntity();
@@ -85,7 +85,7 @@ class ProjectServiceTest {
         when(projectRepository.save(any(ProjectEntity.class))).thenReturn(savedEntity);
 
         // when
-        Long createdId = projectService.createProject(request);
+        Long createdId = projectService.create(request);
 
         // then
         Assertions.assertEquals(1L, createdId);
@@ -105,7 +105,7 @@ class ProjectServiceTest {
                 thenReturn(new Project(expectedId, "Test Project", "Test Description"));
 
         // when
-        Project project = projectService.getProjectById(expectedId);
+        Project project = projectService.getById(expectedId);
 
         // then/verify
         Assertions.assertEquals(expectedId, project.getId());
@@ -120,11 +120,11 @@ class ProjectServiceTest {
         when(projectRepository.findById(invalidId)).thenReturn(Optional.empty());
 
         // when/then
-        Assertions.assertThrows(NotFoundException.class, () -> projectService.getProjectById(invalidId));
+        Assertions.assertThrows(NotFoundException.class, () -> projectService.getById(invalidId));
     }
 
     @Test
-    void updateProject_updates_description_when_project_exists() throws NotFoundException {
+    void updateProject_updates_description_when__exists() throws NotFoundException {
         // given
         Long projectId = 1L;
         String newDescription = "Updated Description";
@@ -142,7 +142,7 @@ class ProjectServiceTest {
         when(projectMapper.updateRequestToEntity(request, existingEntity)).thenReturn(updatedEntity);
 
         // when
-        projectService.updateProject(projectId, request);
+        projectService.update(projectId, request);
 
         // then
         Assertions.assertEquals(newDescription, existingEntity.getDescription());
@@ -150,18 +150,18 @@ class ProjectServiceTest {
     }
 
     @Test
-    void updateProject_throws_NotFoundException_when_project_not_found() {
+    void updateProject_throws_NotFoundException_when__not_found() {
         // given
         Long projectId = 999L;
         UpdateProjectRequest request = new UpdateProjectRequest("Any Description");
         when(projectRepository.findById(projectId)).thenReturn(Optional.empty());
 
         // when/then
-        Assertions.assertThrows(NotFoundException.class, () -> projectService.updateProject(projectId, request));
+        Assertions.assertThrows(NotFoundException.class, () -> projectService.update(projectId, request));
     }
 
     @Test
-    void deleteProject_deletes_when_project_exists() throws NotFoundException {
+    void deleteProject_deletes_when__exists() throws NotFoundException {
         // given
         Long projectId = 1L;
         ProjectEntity entity = new ProjectEntity();
@@ -172,19 +172,19 @@ class ProjectServiceTest {
         when(projectRepository.findById(projectId)).thenReturn(Optional.of(entity));
 
         // when
-        projectService.deleteProject(projectId);
+        projectService.delete(projectId);
 
         // then
         Mockito.verify(projectRepository).deleteById(projectId);
     }
 
     @Test
-    void deleteProject_throws_NotFoundException_when_project_not_found() {
+    void deleteProject_throws_NotFoundException_when__not_found() {
         // given
         Long projectId = 999L;
         when(projectRepository.findById(projectId)).thenReturn(Optional.empty());
 
         // when/then
-        Assertions.assertThrows(NotFoundException.class, () -> projectService.deleteProject(projectId));
+        Assertions.assertThrows(NotFoundException.class, () -> projectService.delete(projectId));
     }
 }
