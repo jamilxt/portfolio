@@ -81,15 +81,14 @@ class ProjectServiceTest {
         savedEntity.setName("New Project");
         savedEntity.setDescription("New Description");
 
+        when(projectMapper.createRequestToEntity(request)).thenReturn(entityToSave);
         when(projectRepository.save(any(ProjectEntity.class))).thenReturn(savedEntity);
 
         // when
-        Project result = projectService.createProject(request);
+        Long createdId = projectService.createProject(request);
 
         // then
-        Assertions.assertEquals(1L, result.getId());
-        Assertions.assertEquals("New Project", result.getName());
-        Assertions.assertEquals("New Description", result.getDescription());
+        Assertions.assertEquals(1L, createdId);
     }
 
     @Test
