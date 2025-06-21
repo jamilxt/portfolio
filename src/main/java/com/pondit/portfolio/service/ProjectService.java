@@ -12,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -39,21 +38,23 @@ public class ProjectService {
      * @throws NotFoundException if the project with the specified ID is not found
      */
     public Project getProjectById(Long id) throws NotFoundException {
-        var projectEntity = projectRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Project not found"));
+        var projectEntity = findEntityById(id);
         return projectMapper.entityToDomain(projectEntity);
     }
 
     public void updateProject(Long id, UpdateProjectRequest request) throws NotFoundException {
-        var projectEntity = projectRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Project not found"));
+        var projectEntity = findEntityById(id);
         var updatedProjectEntity = projectMapper.updateRequestToEntity(request, projectEntity);
         projectRepository.save(updatedProjectEntity);
     }
 
     public void deleteProject(Long id) throws NotFoundException {
-        projectRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Project not found"));
+        findEntityById(id);
         projectRepository.deleteById(id);
+    }
+
+    private ProjectEntity findEntityById(Long id) throws NotFoundException {
+        return projectRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Project not found"));
     }
 }
