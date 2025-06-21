@@ -50,6 +50,13 @@ public class ProjectService {
         return new Project(savedEntityId, savedEntityName, savedEntityDescription);
     }
 
+    /**
+     * Retrieves a project by its ID.
+     *
+     * @param id the ID of the project to retrieve
+     * @return the project domain object
+     * @throws NotFoundException if the project with the specified ID is not found
+     */
     public Project getProjectById(Long id) throws NotFoundException {
         var projectEntity = projectRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Project not found"));
