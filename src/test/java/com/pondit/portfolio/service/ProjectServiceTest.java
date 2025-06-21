@@ -3,6 +3,7 @@ package com.pondit.portfolio.service;
 import com.pondit.portfolio.exception.custom.NotFoundException;
 import com.pondit.portfolio.mapper.ProjectMapper;
 import com.pondit.portfolio.model.domain.Project;
+import com.pondit.portfolio.model.dto.CreateProjectRequest;
 import com.pondit.portfolio.persistence.entity.ProjectEntity;
 import com.pondit.portfolio.persistence.repository.ProjectRepository;
 import org.junit.jupiter.api.Assertions;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -62,6 +64,30 @@ class ProjectServiceTest {
         Assertions.assertEquals(2L, result.get(1).getId());
         Assertions.assertEquals("Project 2", result.get(1).getName());
         Assertions.assertEquals("Description 2", result.get(1).getDescription());
+    }
+
+    @Test
+    void createProject_saves_and_returns_project() {
+        // given
+        CreateProjectRequest request = new CreateProjectRequest("New Project", "New Description");
+        ProjectEntity entityToSave = new ProjectEntity();
+        entityToSave.setName("New Project");
+        entityToSave.setDescription("New Description");
+
+        ProjectEntity savedEntity = new ProjectEntity();
+        savedEntity.setId(1L);
+        savedEntity.setName("New Project");
+        savedEntity.setDescription("New Description");
+
+        when(projectRepository.save(any(ProjectEntity.class))).thenReturn(savedEntity);
+
+        // when
+        Project result = projectService.createProject(request);
+
+        // then
+        Assertions.assertEquals(1L, result.getId());
+        Assertions.assertEquals("New Project", result.getName());
+        Assertions.assertEquals("New Description", result.getDescription());
     }
 
     @Test
