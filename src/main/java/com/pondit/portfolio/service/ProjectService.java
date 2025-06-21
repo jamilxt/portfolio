@@ -24,9 +24,7 @@ public class ProjectService {
     public List<Project> getAllProjects(Pageable pageable) {
         List<ProjectEntity> entityList = projectRepository.findAll(pageable).getContent();
         return entityList.stream().map(entity -> {
-            Project domain = new Project();
-            BeanUtils.copyProperties(entity, domain);
-            return domain;
+            return projectMapper.entityToDomain(entity);
         }).toList();
     }
 
