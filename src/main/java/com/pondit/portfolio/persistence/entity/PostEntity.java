@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-
 @Getter
+@Setter
 @Entity
 @Table(name = "post")
 public class PostEntity {
@@ -14,19 +14,13 @@ public class PostEntity {
     @GeneratedValue
     private Long id;
 
-    @Setter
     private String title;
-
-    @Setter
     private String content;
-
-    @Setter
     private String slug;
 
-    @Setter
     @Column(name = "is_published")
     private Boolean published;
 
-    @Setter
     private LocalDateTime publishedAt;
 }
+
