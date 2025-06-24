@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class PostEntity {
     @Id
     @GeneratedValue
+    @Setter
     private Long id;
 
     @Setter

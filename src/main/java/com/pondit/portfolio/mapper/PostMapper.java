@@ -18,6 +18,7 @@ public class PostMapper {
     public PostEntity createRequestToEntity(CreatePostRequest post) {
         PostEntity entity = new PostEntity();
         BeanUtils.copyProperties(post, entity);
+        entity.setPublished(true);
         return entity;
     }
 
