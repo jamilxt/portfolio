@@ -89,16 +89,16 @@ class PostServiceTest {
         // given
         CreatePostRequest request = new CreatePostRequest("Post 1", "Content 1", "post-1", true, LocalDateTime.of(2025, 1, 1, 12, 0));
         PostEntity entityToSave = new PostEntity();
-        entityToSave.setTitle("New Post");
-        entityToSave.setContent("New Content");
+        entityToSave.setTitle("Post 1");
+        entityToSave.setContent("Content 1");
 
         PostEntity savedEntity = new PostEntity();
         savedEntity.setId(1L);
         savedEntity.setTitle("New Post");
         savedEntity.setContent("New Content");
         savedEntity.setSlug("new-post");
-        savedEntity.setPublished(false);
-        savedEntity.setPublishedAt(null);
+        savedEntity.setPublished(true);
+        savedEntity.setPublishedAt(LocalDateTime.of(2025, 1, 1, 12, 0));
 
         when(postMapper.domainToEntity(request)).thenReturn(entityToSave);
         when(postRepository.save(any(PostEntity.class))).thenReturn(savedEntity);
