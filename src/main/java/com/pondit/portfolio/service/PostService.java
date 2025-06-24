@@ -1,6 +1,4 @@
 package com.pondit.portfolio.service;
-
-
 import com.pondit.portfolio.exception.custom.NotFoundException;
 import com.pondit.portfolio.mapper.PostMapper;
 import com.pondit.portfolio.model.domain.Post;
@@ -8,21 +6,18 @@ import com.pondit.portfolio.model.dto.CreatePostRequest;
 import com.pondit.portfolio.model.dto.UpdatePostRequest;
 import com.pondit.portfolio.persistence.entity.PostEntity;
 import com.pondit.portfolio.persistence.repository.PostRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class PostService {
 
     private final PostRepository postRepository;
     private final PostMapper postMapper;
-
-    public PostService(PostRepository postRepository, PostMapper postMapper) {
-        this.postRepository = postRepository;
-        this.postMapper = postMapper;
-    }
 
 
     public List<Post> getAllPost(Pageable pageable){
