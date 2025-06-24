@@ -33,7 +33,7 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
     - [x] @RestControllerAdvice
     - [x] Problem Details RFC 7807
     - [x] @ExceptionHandler
-    - [ ] @ControllerAdvice
+    - [x] @ControllerAdvice
 - [x] Logging
   - [x] Framework
     - [x] Logback
@@ -42,6 +42,7 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
   - [x] Configure Logging using application.properties
   - [ ] Configure Logback using XML
 - [ ] External Service Call
+  - [ ] HTTP Client
   - [ ] RestTemplate
   - [ ] WebClient
   - [ ] Feign Client
@@ -87,10 +88,10 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
 - [x] Spring Profiles (local, dev, prod)
 - [ ] Spring Data JPA
   - [x] @Entity
-  - [ ] @Table
+  - [x] @Table
   - [x] @Id
   - [x] @GeneratedValue
-  - [ ] @Column
+  - [x] @Column
   - [ ] @OneToMany
   - [ ] @ManyToOne
   - [ ] @ManyToMany
@@ -113,10 +114,11 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
   - [ ] Code Quality
     - [ ] SonarQube
     - [ ] SonarCloud
-  - [ ] Code Review
-  - [ ] Unit Testing
-    - [ ] JUnit 5
-    - [ ] Mockito
+  - [x] Code Refactoring
+  - [x] Code Review
+  - [x] Unit Testing
+    - [x] JUnit 5
+    - [x] Mockito
   - [ ] Integration Testing
     - [ ] Spring Test
     - [ ] Testcontainers
