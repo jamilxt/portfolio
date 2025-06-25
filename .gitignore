@@ -1,6 +1,10 @@
 HELP.md
 target/
+<<<<<<< HEAD
 !.mvn/wrapper/maven-wrapper.jar
+=======
+.mvn/wrapper/maven-wrapper.jar
+>>>>>>> 5949def (Post service and  test)
 !**/src/main/**/target/
 !**/src/test/**/target/
 
@@ -31,4 +35,7 @@ build/
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
 /data/
+=======
+>>>>>>> 5949def (Post service and  test)
