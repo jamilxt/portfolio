@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/resume")
 @Controller
 public class ResumeController {
-    @Autowired
-    ResumeConfig resumeConfig;
-    @Autowired
-    ProjectService projectService;
+
+    private final ResumeConfig resumeConfig;
+    private final ProjectService projectService;
+
+    public ResumeController(ResumeConfig resumeConfig, ProjectService projectService) {
+        this.resumeConfig = resumeConfig;
+        this.projectService = projectService;
+    }
 
     @Value("${site.title}")
     String siteTitle;
