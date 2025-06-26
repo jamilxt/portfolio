@@ -4,6 +4,7 @@ import com.pondit.portfolio.persistence.entity.blogEntity.CommentEn;
 import com.pondit.portfolio.persistence.entity.blogEntity.PostEn;
 import com.pondit.portfolio.persistence.repository.blogRepo.CommentRepository;
 import com.pondit.portfolio.persistence.repository.blogRepo.PostEnRepository;
+import lombok.RequiredArgsConstructor;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
@@ -25,6 +26,7 @@ public class BlogController {
     private final CommentRepository commentRepository;
     private final Parser markdownParser;
     private final HtmlRenderer htmlRenderer;
+
 
     public BlogController(PostEnRepository postRepository, CommentRepository commentRepository) {
         this.postRepository = postRepository;

@@ -15,4 +15,5 @@ public class Post {
     private String slug;
     private Boolean published;
     private LocalDateTime publishedAt;
+
 }
