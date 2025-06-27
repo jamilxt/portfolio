@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -24,9 +25,19 @@ public class PostService {
         return entityList.stream().map(postMapper::entityToDomain).toList();
     }
 
-    public Long create(CreatePostRequest post) {
-        PostEntity entityToSave = postMapper.createRequestToEntity(post);
-        PostEntity savedEntity = postRepository.save(entityToSave);
+    public List<Post> getAllPublishedPosts(Pageable pageable) {
+        List<PostEntity> entityList = postRepository.findAllByPublishedIsTrue(pageable).getContent();
+        return entityList.stream().map(postMapper::entityToDomain).toList();
+    }
+
+    public Long create(CreatePostRequest request) {
+        var entityToSave = postMapper.createRequestToEntity(request);
+
+        if (request.published()) {
+            entityToSave.setPublishedAt(LocalDateTime.now());
+        }
+
+        var savedEntity = postRepository.save(entityToSave);
         return savedEntity.getId();
 
     }
@@ -36,17 +47,22 @@ public class PostService {
         return postMapper.entityToDomain(postEntity);
     }
 
-    public String  update(Long id, UpdatePostRequest post) throws NotFoundException {
+    public void update(Long id, UpdatePostRequest request) throws NotFoundException {
         PostEntity postEntity = this.findEntityById(id);
-        PostEntity updatedPostEntity = postMapper.updateRequestToEntity(post, postEntity);
+        PostEntity updatedPostEntity = postMapper.updateRequestToEntity(request, postEntity);
+
+        if (request.published()) {
+            updatedPostEntity.setPublishedAt(LocalDateTime.now());
+        } else {
+            updatedPostEntity.setPublishedAt(null);
+        }
+
         postRepository.save(updatedPostEntity);
-        return "Post updated successfully with ID: " + id;
     }
 
-    public String delete(Long id) throws NotFoundException {
+    public void delete(Long id) throws NotFoundException {
         this.findEntityById(id);
         postRepository.deleteById(id);
-        return "Post deleted successfully with ID: " + id;
     }
 
 

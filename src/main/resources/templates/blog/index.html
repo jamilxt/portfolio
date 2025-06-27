@@ -98,10 +98,10 @@
     <div class="row">
         <div class="col-lg-8">
             <!-- Blog Post 1 -->
-            <div class="neubrutalist-card p-4" th:each="post : ${controllerPosts}">
-                <h2 th:text="${post.title}">Post Title One</h2>
-                <p th:text="${post.publishedAt}" class="post-meta">Posted on May 17, 2025 by Author</p>
-                <p th:text="${post.content}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+            <div class="neubrutalist-card p-4" th:each="post : ${postList}">
+                <h2 th:text="${post.title}"></h2>
+                <p th:text="${post.publishedAt}" class="post-meta"></p>
+                <p th:text="${post.content}"></p>
                 <a href="blog/post-details" class="btn btn-neubrutalist">Read More</a>
             </div>
             <!-- Blog Post 2 -->

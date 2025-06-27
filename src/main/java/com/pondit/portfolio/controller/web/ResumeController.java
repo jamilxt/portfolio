@@ -2,8 +2,8 @@ package com.pondit.portfolio.controller.web;
 
 import com.pondit.portfolio.config.ResumeConfig;
 import com.pondit.portfolio.service.ProjectService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
+@RequiredArgsConstructor
 @RequestMapping("/resume")
 @Controller
 public class ResumeController {
-    @Autowired
-    ResumeConfig resumeConfig;
-    @Autowired
-    ProjectService projectService;
+    private final ResumeConfig resumeConfig;
+    private final ProjectService projectService;
 
     @Value("${site.title}")
     String siteTitle;

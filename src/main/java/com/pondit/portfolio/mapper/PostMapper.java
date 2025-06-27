@@ -23,6 +23,7 @@ public class PostMapper {
 
     public PostEntity updateRequestToEntity(UpdatePostRequest post,PostEntity entity) {
         entity.setContent(post.content());
+        entity.setPublished(post.published());
         return entity;
     }
 }
