@@ -30,6 +30,5 @@ public class PostEntity {
     private Boolean published;
 
     @Setter
-    @CreationTimestamp
     private LocalDateTime publishedAt;
 }
