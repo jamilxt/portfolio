@@ -26,7 +26,7 @@ public class BlogController {
     @GetMapping
     public String indexPage(Model model) {
         Pageable pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "publishedAt");
-        List<Post> posts = postService.getAllPosts(pageable);
+        List<Post> posts = postService.getAllPublishedPosts(pageable);
         model.addAttribute("postList", posts);
         return "blog/index";
     }

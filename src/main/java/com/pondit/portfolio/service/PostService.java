@@ -24,6 +24,11 @@ public class PostService {
         return entityList.stream().map(postMapper::entityToDomain).toList();
     }
 
+    public List<Post> getAllPublishedPosts(Pageable pageable) {
+        List<PostEntity> entityList = postRepository.findAllByPublishedIsTrue(pageable).getContent();
+        return entityList.stream().map(postMapper::entityToDomain).toList();
+    }
+
     public Long create(CreatePostRequest post) {
         PostEntity entityToSave = postMapper.createRequestToEntity(post);
         PostEntity savedEntity = postRepository.save(entityToSave);
