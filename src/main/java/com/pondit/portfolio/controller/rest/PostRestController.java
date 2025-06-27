@@ -1,6 +1,7 @@
 package com.pondit.portfolio.controller.rest;
 
 import com.pondit.portfolio.model.domain.Post;
+import com.pondit.portfolio.model.dto.CreatePostRequest;
 import com.pondit.portfolio.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,5 +23,11 @@ public class PostRestController {
     @GetMapping
     public List<Post> getAllPosts(@ParameterObject Pageable pageable) {
         return postService.getAllPosts(pageable);
+    }
+
+    @Operation(summary = "Create a new post")
+    @PostMapping
+    public void createPost(CreatePostRequest createPostRequest) {
+       postService.create(createPostRequest);
     }
 }
