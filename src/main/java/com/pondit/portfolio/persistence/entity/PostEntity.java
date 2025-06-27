@@ -25,4 +25,14 @@ public class PostEntity {
     private Boolean published;
 
     private LocalDateTime publishedAt;
+
+    @PrePersist
+    public void setDefaults() {
+        if (published == null) {
+            published = true;
+        }
+        if (publishedAt == null && Boolean.TRUE.equals(published)) {
+            publishedAt = LocalDateTime.now();
+        }
+    }
 }
