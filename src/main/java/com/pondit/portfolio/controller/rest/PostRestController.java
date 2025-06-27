@@ -5,19 +5,19 @@ import com.pondit.portfolio.model.dto.CreatePostRequest;
 import com.pondit.portfolio.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Tag(name = "Post Resource", description = "API for managing posts")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("api/posts")
 public class PostRestController {
-    @Autowired
-    PostService postService;
+    private final PostService postService;
 
     @Operation(summary = "Get all posts")
     @GetMapping

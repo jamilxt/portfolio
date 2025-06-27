@@ -7,8 +7,8 @@ import com.pondit.portfolio.model.dto.UpdateProjectRequest;
 import com.pondit.portfolio.service.ProjectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Tag(name = "Project Resource", description = "API for managing projects")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("api/projects")
 public class ProjectRestController {
-    @Autowired
-    ProjectService projectService;
+    private final ProjectService projectService;
 
     @Operation(summary = "Get all projects")
     @GetMapping
