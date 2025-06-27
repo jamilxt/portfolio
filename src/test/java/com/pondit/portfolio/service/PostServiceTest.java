@@ -57,10 +57,12 @@ public class PostServiceTest {
         assertEquals(2, result.size());
         assertEquals(1L, result.get(0).getId());
         assertEquals(2L, result.get(1).getId());
-    }@Test
+    }
+
+    @Test
     void create_returns_saved_post_id() {
         // given
-        CreatePostRequest request = new CreatePostRequest("Sample Title", "Sample Content", "Sample Author");
+        CreatePostRequest request = new CreatePostRequest("Sample Title", "Sample Content", "Sample Author", true);
         PostEntity entityToSave = new PostEntity();
         entityToSave.setTitle("new title");
         entityToSave.setContent("new content");
@@ -103,7 +105,7 @@ public class PostServiceTest {
     void update_returns_success_message() throws NotFoundException {
         // given
         Long id = 1L;
-        UpdatePostRequest request = new UpdatePostRequest("new content");
+        UpdatePostRequest request = new UpdatePostRequest("new content", true);
         PostEntity existingEntity = new PostEntity();
         existingEntity.setId(id);
         PostEntity updatedEntity = new PostEntity();
@@ -114,10 +116,11 @@ public class PostServiceTest {
         when(postRepository.save(updatedEntity)).thenReturn(updatedEntity);
 
         // when
-        String result = postService.update(id, request);
+        postService.update(id, request);
 
         // then
-        assertEquals("Post updated successfully with ID: " + id, result);
+        // TODO: check how to unit test void methods
+//        assertEquals("Post updated successfully with ID: " + id, result); // bad practice
     }
 
     @Test
@@ -130,10 +133,11 @@ public class PostServiceTest {
         when(postRepository.findById(id)).thenReturn(java.util.Optional.of(entity));
 
         // when
-        String result = postService.delete(id);
+        postService.delete(id);
 
         // then
-        assertEquals("Post deleted successfully with ID: " + id, result);
+        // TODO: check how to unit test void methods
+//        assertEquals("Post deleted successfully with ID: " + id, result);
     }
 
 }
