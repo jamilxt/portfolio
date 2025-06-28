@@ -17,6 +17,7 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
 - [x] Server-Side (using Template Engine)
     - [x] / (Portfolio Homepage)
     - [x] Practice Thymeleaf Tags (e.g. th:if, th:each, etc.)
+    - [ ] Thymeleaf Fragment & Layouts (Reusability)
 - [ ] REST API
     - [X] /api/projects (CRUD for Projects)
     - [ ] Secure Endpoints
