@@ -52,6 +52,7 @@ public class ResumeConfig {
         private String email;
         private String linkedinUrl;
         private String githubUrl;
+        private String aboutMe;
 
         // Getters and Setters
         public String getName() {
@@ -84,6 +85,14 @@ public class ResumeConfig {
 
         public void setGithubUrl(String githubUrl) {
             this.githubUrl = githubUrl;
+        }
+
+        public String getAboutMe() {
+            return aboutMe;
+        }
+
+        public void setAboutMe(String aboutMe) {
+            this.aboutMe = aboutMe;
         }
     }
 
