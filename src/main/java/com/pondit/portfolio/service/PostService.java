@@ -31,15 +31,17 @@ public class PostService {
     }
 
     public Long create(CreatePostRequest request) {
-        var entityToSave = postMapper.createRequestToEntity(request);
+        if (postRepository.existsBySlug(request.slug())) {
+            throw new IllegalArgumentException("slug already exists");
+        }
 
+        var entityToSave = postMapper.createRequestToEntity(request);
         if (request.published()) {
             entityToSave.setPublishedAt(LocalDateTime.now());
         }
 
         var savedEntity = postRepository.save(entityToSave);
         return savedEntity.getId();
-
     }
 
     public Post getById(Long id) throws NotFoundException {
