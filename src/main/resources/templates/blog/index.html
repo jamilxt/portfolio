@@ -102,7 +102,8 @@
                 <h2 th:text="${post.title}"></h2>
                 <p th:text="${post.publishedAt}" class="post-meta"></p>
                 <p th:text="${post.content}"></p>
-                <a href="blog/post-details" class="btn btn-neubrutalist">Read More</a>
+                <a th:href="@{'/blog/detail/' + ${post.id}}" class="btn btn-neubrutalist">Read More</a>
+
             </div>
             <!-- Blog Post 2 -->
 

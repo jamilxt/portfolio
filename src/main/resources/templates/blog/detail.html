@@ -122,35 +122,9 @@
         <div class="col-lg-8">
             <!-- Post Content -->
             <div class="neubrutalist-card p-4">
-                <h2>Exploring Java Concurrency with Thread Pools</h2>
-                <p class="post-meta">Posted on May 17, 2025 by Author</p>
-                <div class="post-content">
-                    <h3>Why Java Concurrency Matters</h3>
-                    <p>Java’s concurrency utilities, introduced in **Java 5**, provide robust tools for managing multi-threaded applications. Thread pools, in particular, are essential for optimizing resource usage and improving performance in applications with multiple tasks.</p>
-
-                    <h4>Key Benefits of Thread Pools:</h4>
-                    <ul>
-                        <li>**Resource Management**: Reuses threads to reduce overhead.</li>
-                        <li>**Scalability**: Handles large numbers of tasks efficiently.</li>
-                        <li>**Simplified Control**: Manages thread lifecycle automatically.</li>
-                    </ul>
-
-                    <p>Below is an example of using a **ThreadPoolExecutor** to process tasks concurrently. This code demonstrates creating a thread pool and submitting tasks to it. <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ThreadPoolExecutor.html" class="text-dark">Learn more in the official Java documentation</a>.</p>
-
-                    <div class="code-header">
-                        <button class="btn btn-copy" onclick="copyCode()">Copy</button>
-                    </div>
-
-                    <h4>How It Works:</h4>
-                    <ol>
-                        <li><strong>ThreadPoolExecutor Creation</strong>: Configures a pool with a core size of 2 and a maximum of 4 threads.</li>
-                        <li><strong>Task Submission</strong>: Submits 5 tasks, which are executed by available threads.</li>
-                        <li><strong>Shutdown</strong>: Gracefully stops the executor after tasks are complete.</li>
-                    </ol>
-
-                    <p>This is a basic example. For production, consider tuning parameters like queue size and rejection policies based on your application’s needs.</p>
-                </div>
-                <a href="/" class="btn btn-neubrutalist mt-3">Back to Home</a>
+                <span th:text="${post.title}">title</span>
+                <p th:text="${post.publishedAt}" class="post-meta"></p>
+                <div th:utext="${post.content}"></div>
             </div>
             <!-- Comment Section -->
             <div class="neubrutalist-card p-4 comment-section">
