@@ -48,7 +48,7 @@ Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
   - [ ] Feign Client
 - [ ] Boilerplate Code Reduce
   - [x] Mapper for Mapping
-    - [x Native from Spring: BeanUtils
+    - [x] Native from Spring: BeanUtils
     - [ ] 3rd Party Libraries
       - [ ] MapStruct
       - [ ] ModelMapper
