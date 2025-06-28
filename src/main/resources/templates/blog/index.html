@@ -98,17 +98,17 @@
     <div class="row">
         <div class="col-lg-8">
             <!-- Blog Post 1 -->
-            <div class="neubrutalist-card p-4">
-                <h2>Post Title One</h2>
-                <p class="post-meta">Posted on May 17, 2025 by Author</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+            <div class="neubrutalist-card p-4" th:each="post : ${postList}">Add commentMore actions
+                <h2 th:text="${post.title}"></h2>
+                <p th:text="${post.publishedAt}" class="post-meta"></p>
+                <p th:text="${post.content}"></p>
                 <a href="blog/post-title-one" class="btn btn-neubrutalist">Read More</a>
             </div>
             <!-- Blog Post 2 -->
-            <div class="neubrutalist-card p-4">
-                <h2>Post Title Two</h2>
-                <p class="post-meta">Posted on May 16, 2025 by Author</p>
-                <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+            <div class="neubrutalist-card p-4" th:each="post : ${postList}">Add commentMore actions
+                <h2 th:text="${post.title}"></h2>
+                <p th:text="${post.publishedAt}" class="post-meta"></p>
+                <p th:text="${post.content}"></p>
                 <a href="blog/post-title-two" class="btn btn-neubrutalist">Read More</a>
             </div>
             <!-- Pagination -->
