@@ -81,6 +81,11 @@
         .comment-section {
             margin-top: 2rem;
         }
+        .preserve-whitespace {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
         .comment-item {
             border: 2px solid #000;
             background-color: #fff;
@@ -122,9 +127,9 @@
         <div class="col-lg-8">
             <!-- Post Content -->
             <div class="neubrutalist-card p-4">
-                <span th:text="${post.title}">title</span>
-                <p th:text="${post.publishedAt}" class="post-meta"></p>
-                <div th:utext="${post.content}"></div>
+                <h2 th:text="${post.title}">title</h2>
+                <p th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}" class="post-meta"></p>
+                <div th:text="${post.content}" class="preserve-whitespace"></div>
             </div>
             <!-- Comment Section -->
             <div class="neubrutalist-card p-4 comment-section">
