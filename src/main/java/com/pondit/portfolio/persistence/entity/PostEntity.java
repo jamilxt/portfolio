@@ -3,13 +3,14 @@ package com.pondit.portfolio.persistence.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @Getter
 @Entity
 @Table(name = "post", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "slug")
+        @UniqueConstraint(columnNames = "Intro")
 })
 public class PostEntity {
     @Id
@@ -21,6 +22,8 @@ public class PostEntity {
     private String title;
 
     @Setter
+    @Lob
+    @Column(columnDefinition = "CLOB")
     private String content;
 
     @Setter
@@ -32,4 +35,5 @@ public class PostEntity {
 
     @Setter
     private LocalDateTime publishedAt;
+
 }
