@@ -4,6 +4,7 @@ import com.pondit.portfolio.exception.custom.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -33,5 +34,13 @@ public class GlobalRestApiExceptionHandler {
     public ProblemDetail handleGenericException(Exception e) {
         log.error("Generic Exception: ", e);
         return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong");
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgs(IllegalArgumentException ex) {
+        if (ex.getMessage().contains("slug")) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Slug must be unique");
+        }
+        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 }
