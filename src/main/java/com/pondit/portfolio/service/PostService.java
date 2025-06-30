@@ -8,7 +8,10 @@ import com.pondit.portfolio.model.dto.UpdatePostRequest;
 import com.pondit.portfolio.persistence.entity.PostEntity;
 import com.pondit.portfolio.persistence.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -25,9 +28,10 @@ public class PostService {
         return entityList.stream().map(postMapper::entityToDomain).toList();
     }
 
-    public List<Post> getAllPublishedPosts(Pageable pageable) {
-        List<PostEntity> entityList = postRepository.findAllByPublishedIsTrue(pageable).getContent();
-        return entityList.stream().map(postMapper::entityToDomain).toList();
+    public Page<Post> getAllPublishedPosts(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "publishedAt"));
+        var entityPage = postRepository.findAllByPublishedIsTrue(pageable);
+        return entityPage.map(postMapper::entityToDomain);
     }
 
     public Long create(CreatePostRequest request) {
@@ -66,7 +70,7 @@ public class PostService {
     }
 
 
-    private PostEntity findEntityById(Long id) throws  NotFoundException {
+    private PostEntity findEntityById(Long id) throws NotFoundException {
         return postRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Post not found"));
     }
