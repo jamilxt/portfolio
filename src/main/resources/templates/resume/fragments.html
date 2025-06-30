@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block th:fragment="header(siteTitle, siteDescription)">
+    <header class="neubrutalist-header">
+        <div class="container">
+            <h1 class="display-4" th:text="${siteTitle}">Site Title</h1>
+            <p class="lead" th:text="${siteDescription}">Site description here</p>
+        </div>
+    </header>
+</th:block>
+
+<th:block th:fragment="footer">
+    <footer class="neubrutalist-header py-3 mt-5">
+        <div class="container text-center">
+            <p>© 2025 My Neubrutalist Blog. All rights reserved.</p>
+        </div>
+    </footer>
+</th:block>
+</body>
+</html>
+
