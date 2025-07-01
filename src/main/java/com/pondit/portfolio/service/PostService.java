@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -31,11 +32,23 @@ public class PostService {
     }
 
     public Long create(CreatePostRequest request) {
-        if (postRepository.existsBySlug(request.slug())) {
-            throw new IllegalArgumentException("slug already exists");
-        }
-
         var entityToSave = postMapper.createRequestToEntity(request);
+
+        var title = request.title();
+        title = title.toLowerCase().replaceAll("[^a-z0-9\\s]", "").replaceAll("\\s+", "-");
+        long timestamp = System.currentTimeMillis();
+        String base64Timestamp = Base64.getUrlEncoder().withoutPadding()
+                .encodeToString(Long.toString(timestamp).getBytes());
+        String slug = title + "-" + base64Timestamp;
+
+        while (postRepository.existsBySlug(slug)) {
+            timestamp = System.currentTimeMillis();
+            base64Timestamp = Base64.getUrlEncoder().withoutPadding()
+                    .encodeToString(Long.toString(timestamp).getBytes());
+            slug = title + "-" + base64Timestamp;
+        }
+        entityToSave.setSlug(slug);
+
         if (request.published()) {
             entityToSave.setPublishedAt(LocalDateTime.now());
         }
