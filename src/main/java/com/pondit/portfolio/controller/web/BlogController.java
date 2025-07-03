@@ -1,6 +1,7 @@
 package com.pondit.portfolio.controller.web;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -15,9 +16,9 @@ import com.pondit.portfolio.model.domain.Post;
 import java.util.List;
 
 
-@RequestMapping("/blog")
+@RequestMapping({ "/","/blog"})
 @Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BlogController {
 
     private final PostService postService;
@@ -25,7 +26,8 @@ public class BlogController {
     @GetMapping
     public String indexPage(Model model) {
         Pageable pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "publishedAt");
-        List<Post> posts = postService.getAllPosts(pageable);
+
+        List<Post> posts = postService.getAllPublishedPosts(pageable);
         model.addAttribute("postList", posts);
         return "blog/index";
     }
