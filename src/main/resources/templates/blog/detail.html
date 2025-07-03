@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-    <title>Post Details</title>
+    <layout:fragment th:name="title"></layout:fragment>
 </head>
 <body>
 <div layout:fragment="content">
@@ -17,7 +17,8 @@
                     <p>Java’s concurrency utilities, introduced in Java 5, provide robust tools for managing multi-threaded applications...</p>
                     <!-- Add remaining content -->
                 </div>
-                <a href="/" class="btn btn-neubrutalist mt-3">Back to Home</a>
+                <a th:href="@{/}">Home</a>
+                <a th:href="@{/blog}">Blog</a>
             </div>
 
             <div class="neubrutalist-card p-4 comment-section">
@@ -46,9 +47,9 @@
             <div class="sidebar">
                 <h3>Navigation</h3>
                 <ul class="list-unstyled">
-                    <li><a href="/" class="text-dark">Home</a></li>
-                    <li><a href="/resume" class="text-dark">Resume</a></li>
-                    <li><a href="/#contact" class="text-dark">Contact</a></li>
+                    <li><a th:href="@{/'/'}" class="text-dark">Home</a></li>
+                    <li><a th:href="@{/resume}" class="text-dark">Resume</a></li>
+                    <li><a th:href="@{/#contact}" class="text-dark">Contact</a></li>
                 </ul>
                 <h3>Subscribe</h3>
                 <form>
