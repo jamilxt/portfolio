@@ -7,11 +7,13 @@ import com.pondit.portfolio.model.dto.CreatePostRequest;
 import com.pondit.portfolio.model.dto.UpdatePostRequest;
 import com.pondit.portfolio.persistence.entity.PostEntity;
 import com.pondit.portfolio.persistence.repository.PostRepository;
+import com.pondit.portfolio.utils.PostUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -33,13 +35,22 @@ public class PostService {
     public Long create(CreatePostRequest request) {
         var entityToSave = postMapper.createRequestToEntity(request);
 
+        var title = request.title();
+
+        PostUtils postUtils = new PostUtils();
+        String slug = postUtils.getUniqueSlug(title);
+
+        while (postRepository.existsBySlug(slug)) {
+            slug = postUtils.getUniqueSlug(title);
+        }
+        entityToSave.setSlug(slug);
+
         if (request.published()) {
             entityToSave.setPublishedAt(LocalDateTime.now());
         }
 
         var savedEntity = postRepository.save(entityToSave);
         return savedEntity.getId();
-
     }
 
     public Post getById(Long id) throws NotFoundException {

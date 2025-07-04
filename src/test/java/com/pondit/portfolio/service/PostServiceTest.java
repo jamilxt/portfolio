@@ -62,7 +62,7 @@ public class PostServiceTest {
     @Test
     void create_returns_saved_post_id() {
         // given
-        CreatePostRequest request = new CreatePostRequest("Sample Title", "Sample Content", "Sample Author", true);
+        CreatePostRequest request = new CreatePostRequest("Sample Title", "Sample Content", true);
         PostEntity entityToSave = new PostEntity();
         entityToSave.setTitle("new title");
         entityToSave.setContent("new content");
