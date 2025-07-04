@@ -1,5 +1,6 @@
 package com.pondit.portfolio.exception;
 
+import com.pondit.portfolio.exception.custom.AlreadyExistsException;
 import com.pondit.portfolio.exception.custom.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -36,11 +37,10 @@ public class GlobalRestApiExceptionHandler {
         return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong");
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> handleIllegalArgs(IllegalArgumentException ex) {
-        if (ex.getMessage().contains("slug")) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Slug must be unique");
-        }
-        return ResponseEntity.badRequest().body(ex.getMessage());
+    @ExceptionHandler(AlreadyExistsException.class)
+    public ProblemDetail handleAlreadyExistsException(AlreadyExistsException ex) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage());
+        problemDetail.setTitle("Resource Already Exists");
+        return problemDetail;
     }
 }
