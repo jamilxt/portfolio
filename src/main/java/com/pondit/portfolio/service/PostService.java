@@ -7,6 +7,7 @@ import com.pondit.portfolio.model.dto.CreatePostRequest;
 import com.pondit.portfolio.model.dto.UpdatePostRequest;
 import com.pondit.portfolio.persistence.entity.PostEntity;
 import com.pondit.portfolio.persistence.repository.PostRepository;
+import com.pondit.portfolio.utils.PostUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,17 +36,12 @@ public class PostService {
         var entityToSave = postMapper.createRequestToEntity(request);
 
         var title = request.title();
-        title = title.toLowerCase().replaceAll("[^a-z0-9\\s]", "").replaceAll("\\s+", "-");
-        long timestamp = System.currentTimeMillis();
-        String base64Timestamp = Base64.getUrlEncoder().withoutPadding()
-                .encodeToString(Long.toString(timestamp).getBytes());
-        String slug = title + "-" + base64Timestamp;
+
+        PostUtils postUtils = new PostUtils();
+        String slug = postUtils.getUniqueSlug(title);
 
         while (postRepository.existsBySlug(slug)) {
-            timestamp = System.currentTimeMillis();
-            base64Timestamp = Base64.getUrlEncoder().withoutPadding()
-                    .encodeToString(Long.toString(timestamp).getBytes());
-            slug = title + "-" + base64Timestamp;
+            slug = postUtils.getUniqueSlug(title);
         }
         entityToSave.setSlug(slug);
 
