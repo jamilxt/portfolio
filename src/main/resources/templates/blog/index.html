@@ -17,8 +17,8 @@
             <a th:href="@{/blog}" class="btn btn-neubrutalist mt-3">View All Posts</a>
         </div>
 
-        <div class="row">
-            <div class="col-md-6" th:if="${latestPost != null}">
+        <div class="row g-4 align-items-start">
+            <div class="col-md-8" th:if="${latestPost != null}">
                 <div class="neubrutalist-card p-3">
                     <h3>Latest Post</h3>
                     <h4 th:text="${latestPost.title}">Java Concurrency Demystified</h4>
@@ -35,11 +35,11 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="sidebar">
                     <h3>Navigation</h3>
                     <ul class="list-unstyled">
-                        <li><a th:href="@{/'/'}" class="text-dark">Home</a></li>
+                        <li><a th:href="@{/}" class="text-dark">Home</a></li>
                         <li><a th:href="@{/resume}" class="text-dark">Resume</a></li>
                         <li><a th:href="@{/#contact}" class="text-dark">Contact</a></li>
                     </ul>
