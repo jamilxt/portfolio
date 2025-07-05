@@ -1,4 +1,3 @@
-// File: src/main/java/com/pondit/portfolio/config/ResumeProperties.java
 package com.pondit.portfolio.config;
 
 import com.pondit.portfolio.model.domain.PersonalInfo;
@@ -11,10 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/**
- * Binds the `resume` section of application.yml / application.properties to a type–safe POJO.
- */
-@Component               // Registers the bean for injection & automatic configuration-properties-scanning
+
+@Component
 @ConfigurationProperties(prefix = "resume")
 @Getter
 @Setter
