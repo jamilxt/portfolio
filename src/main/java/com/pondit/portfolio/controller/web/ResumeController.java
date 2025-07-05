@@ -1,6 +1,6 @@
 package com.pondit.portfolio.controller.web;
 
-import com.pondit.portfolio.model.domain.config.ResumeConfig;
+import com.pondit.portfolio.config.ResumeConfig;
 import com.pondit.portfolio.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
