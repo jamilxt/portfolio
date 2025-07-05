@@ -25,12 +25,17 @@ public class BlogController {
     private final PostService postService;
     private final ResumeConfig resumeConfig;
 
-    @GetMapping
+    @GetMapping()
     public String indexPage(Model model) {
         Pageable pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "publishedAt");
         List<Post> posts = postService.getAllPublishedPosts(pageable);
+
+        List<Post> latestPosts = postService.getLatestPublishedPosts(PageRequest.of(0, 1, Sort.Direction.DESC, "publishedAt"));
+        Post latestPost = latestPosts.isEmpty() ? null : latestPosts.get(0);
+
         model.addAttribute("postList", posts);
         model.addAttribute("personalInfo", resumeConfig.getPersonalInfo());
+        model.addAttribute("latestPost", latestPost);
         return "blog/index";
     }
 
