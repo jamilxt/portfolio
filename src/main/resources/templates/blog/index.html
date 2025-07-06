@@ -101,7 +101,7 @@
             <div class="neubrutalist-card p-4" th:each="post : ${postList}">
                 <h2 th:text="${post.title}"></h2>
                 <p th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}" class="post-meta"></p>
-                <p th:utext="${#strings.replace(post.previewAsHtml, '\n', '<br/>')}"></p>
+                <p th:utext="${post.intro}"></p>
                 <a th:href="@{'/blog/detail/' + ${post.id}}" class="btn btn-neubrutalist">Read More</a>
 
             </div>

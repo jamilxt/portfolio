@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @Getter
 @Entity
@@ -35,5 +33,8 @@ public class PostEntity {
 
     @Setter
     private LocalDateTime publishedAt;
+    @Setter
+    @Column(length = 400)
+    private String intro;
 
 }

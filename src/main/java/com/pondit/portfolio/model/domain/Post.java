@@ -16,17 +16,6 @@ public class Post {
     private String slug;
     private Boolean published;
     private LocalDateTime publishedAt;
-
-
-    public String getPreviewAsHtml() {
-        if (content == null) return "";
-
-        String[] lines = content.split("\\r?\\n");
-        String preview = Arrays.stream(lines)
-                .limit(5)
-                .collect(Collectors.joining("<br>"));
-
-        return preview + (lines.length > 5 ? "<br>..." : "");
-    }
+    private String intro;
 
 }
