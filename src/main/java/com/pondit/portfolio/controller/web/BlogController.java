@@ -30,9 +30,6 @@ public class BlogController {
     @GetMapping("/blog/detail/{id}")
     public String getPostDetails(@PathVariable Long id, Model model) throws NotFoundException {
         Post post = postService.getById(id);
-        if (post == null) {
-            return "redirect:/error/404";
-        }
         model.addAttribute("post", post);
         return "blog/detail";
     }
