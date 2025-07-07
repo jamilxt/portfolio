@@ -1,8 +1,6 @@
 package com.pondit.portfolio.persistence.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,8 +11,15 @@ public class CommentEntity {
     @Id
     @GeneratedValue
     private Long id;
+
     @Setter
     private String content;
+
     @Setter
     private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id", nullable = true)
+    @Setter
+    private PostEntity post;
 }

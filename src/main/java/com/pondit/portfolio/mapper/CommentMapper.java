@@ -19,6 +19,9 @@ public class CommentMapper {
     public Comment entityToDomain(CommentEntity entity) {
         Comment domain = new Comment();
         BeanUtils.copyProperties(entity, domain);
+        if (entity.getPost() != null) {
+            domain.setPostId(entity.getPost().getId());
+        }
         return domain;
     }
     public CommentEntity updateRequestToEntity(UpdateCommentRequest request,CommentEntity entity) {

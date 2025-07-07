@@ -1,4 +1,4 @@
-package com.pondit.portfolio.controller.web;
+package com.pondit.portfolio.controller.rest;
 
 import com.pondit.portfolio.exception.custom.NotFoundException;
 import com.pondit.portfolio.model.domain.Comment;
@@ -7,7 +7,6 @@ import com.pondit.portfolio.model.dto.UpdateCommentRequest;
 import com.pondit.portfolio.service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.web.bind.annotation.*;
 
 
@@ -16,12 +15,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("comments")
-public class CommentController {
+public class CommentRestController {
     private final CommentService commentService;
 
     @Operation(summary = "Create a new comment for a post")
-    @PostMapping
-    public Long createComment(@RequestBody CreateCommentRequest request) {
+    @PostMapping("posts/{postId}/comments")
+    public Long createComment(@RequestBody CreateCommentRequest request) throws NotFoundException {
         return commentService.createComment(request);
     }
 
@@ -48,6 +47,12 @@ public class CommentController {
     public void updateComment(@PathVariable Long id, @RequestBody UpdateCommentRequest request) throws   NotFoundException
     {
         commentService.updateComment(id, request);
+    }
+
+    @Operation(summary = "Get comments by post id")
+    @GetMapping("post/{postId}")
+    public List<Comment> getCommentsByPostId(@PathVariable Long postId) throws NotFoundException {
+        return commentService.getCommentsByPostId(postId);
     }
 
 }
