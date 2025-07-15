@@ -45,11 +45,10 @@ public class ResumeController {
     }
 
     @GetMapping("/download")
-    public void pdfResume(HttpServletResponse response) throws Exception
-    {
+    public void pdfResume(HttpServletResponse response) throws Exception {
         response.setContentType("application/pdf");
         response.setHeader("Content-Disposition", "attachment; filename=resume.pdf");
-        try{
+        try {
             pdfService.generateResumePdf(response.getOutputStream());
         } catch (Exception e) {
             log.error("Error generating PDF resume", e);
