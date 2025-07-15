@@ -102,7 +102,7 @@
                 <h2 th:text="${post.title}"></h2>
                 <p th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}" class="post-meta"></p>
                 <p th:utext="${post.intro}"></p>
-                <a href="@{'/blog/details/' + ${post.id}}" class="btn btn-neubrutalist">Read More</a>
+                <a th:href="@{'/blog/details/' + ${post.id}}" class="btn btn-neubrutalist">Read More</a>
             </div>
             <!-- Blog Post 2 -->
 

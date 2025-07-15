@@ -32,7 +32,7 @@ public class BlogController {
         return "blog/index";
     }
 
-    @GetMapping("/blog/detail/{id}")
+    @GetMapping("/blog/details/{id}")
     public String getPostDetails(@PathVariable Long id, Model model) throws NotFoundException {
         Post post = postService.getById(id);
         model.addAttribute("post", post);
