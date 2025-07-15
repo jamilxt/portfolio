@@ -101,8 +101,8 @@
             <div class="neubrutalist-card p-4" th:each="post : ${postList}">
                 <h2 th:text="${post.title}"></h2>
                 <p th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}" class="post-meta"></p>
-                <p th:text="${post.content}"></p>
-                <a href="blog/post-details" class="btn btn-neubrutalist">Read More</a>
+                <p th:utext="${post.intro}"></p>
+                <a th:href="@{'/blog/details/' + ${post.id}}" class="btn btn-neubrutalist">Read More</a>
             </div>
             <!-- Blog Post 2 -->
 
@@ -134,7 +134,7 @@
         <div class="col-lg-4">
             <div class="sidebar">
                 <h3>About Me</h3>
-                <p>I'm a writer sharing unpolished, honest stories. No fluff, just real talk.</p>
+                <p th:text="${personalInfo.aboutMe}">John Doe</p>
                 <h3>Navigation</h3>
                 <ul class="list-unstyled">
                     <li><a href="/#" class="text-dark">Home</a></li>
