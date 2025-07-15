@@ -5,12 +5,9 @@ import com.pondit.portfolio.exception.custom.NotFoundException;
 import com.pondit.portfolio.model.domain.Comment;
 import com.pondit.portfolio.model.domain.Post;
 import com.pondit.portfolio.model.dto.CreateCommentRequest;
-import com.pondit.portfolio.persistence.entity.PostEntity;
-import com.pondit.portfolio.persistence.repository.PostRepository;
 import com.pondit.portfolio.service.CommentService;
 import com.pondit.portfolio.service.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -51,7 +48,7 @@ public class BlogController {
     @PostMapping("/comment")
     public String addComment(@ModelAttribute CreateCommentRequest request) throws NotFoundException {
         commentService.createComment(request);
-        return "redirect:/blog"; // returns a page redirect (not JSON)
+        return "redirect:/blog";
     }
 
 
