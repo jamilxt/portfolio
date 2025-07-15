@@ -1,4 +1,6 @@
 package com.pondit.portfolio.controller.web;
+
+import com.pondit.portfolio.config.ResumeConfig;
 import com.pondit.portfolio.exception.custom.NotFoundException;
 import com.pondit.portfolio.model.domain.Post;
 import com.pondit.portfolio.service.PostService;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.List;
 
 @RequestMapping({"/", "/blog"})
@@ -18,12 +21,14 @@ import java.util.List;
 @Controller
 public class BlogController {
     private final PostService postService;
+    private final ResumeConfig resumeConfig;
 
     @GetMapping
     public String indexPage(Model model) {
         Pageable pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "publishedAt");
         List<Post> posts = postService.getAllPublishedPosts(pageable);
         model.addAttribute("postList", posts);
+        model.addAttribute("personalInfo", resumeConfig.getPersonalInfo());
         return "blog/index";
     }
 
