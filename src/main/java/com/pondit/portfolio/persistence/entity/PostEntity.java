@@ -25,6 +25,7 @@ public class PostEntity {
     private String content;
 
     @Setter
+    @Column(unique = true)
     private String slug;
 
     @Setter
