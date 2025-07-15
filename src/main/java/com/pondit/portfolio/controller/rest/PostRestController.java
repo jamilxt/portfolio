@@ -40,14 +40,12 @@ public class PostRestController {
         postService.update(id, request);
     }
 
-    // delete a post by id
     @Operation(summary = "Delete a post by id")
     @DeleteMapping("{id}")
     public void deletePost(@PathVariable Long id) throws NotFoundException {
         postService.delete(id);
     }
 
-    // Get a post by id
     @Operation(summary = "Get a post by id")
     @GetMapping("{id}")
     public Post getPostById(@PathVariable Long id) throws NotFoundException {
