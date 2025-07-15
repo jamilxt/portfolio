@@ -1,11 +1,9 @@
 package com.pondit.portfolio.exception;
 
-import com.pondit.portfolio.exception.custom.AlreadyExistsException;
 import com.pondit.portfolio.exception.custom.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -35,12 +33,5 @@ public class GlobalRestApiExceptionHandler {
     public ProblemDetail handleGenericException(Exception e) {
         log.error("Generic Exception: ", e);
         return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong");
-    }
-
-    @ExceptionHandler(AlreadyExistsException.class)
-    public ProblemDetail handleAlreadyExistsException(AlreadyExistsException ex) {
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage());
-        problemDetail.setTitle("Resource Already Exists");
-        return problemDetail;
     }
 }
