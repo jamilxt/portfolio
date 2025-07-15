@@ -3,7 +3,6 @@ package com.pondit.portfolio.persistence.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 
 @Getter
@@ -21,6 +20,8 @@ public class PostEntity {
     private String title;
 
     @Setter
+    @Lob
+    @Column(columnDefinition = "CLOB")
     private String content;
 
     @Setter
@@ -32,4 +33,8 @@ public class PostEntity {
 
     @Setter
     private LocalDateTime publishedAt;
+    @Setter
+    @Column(length = 400)
+    private String intro;
+
 }
