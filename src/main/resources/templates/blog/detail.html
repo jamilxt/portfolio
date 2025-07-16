@@ -9,27 +9,39 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <!-- Removed inline <header> — handled by layout -->
+
 
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
+                <!-- Post Content -->
                 <div class="neubrutalist-card p-4">
-                    <h2>Exploring Java Concurrency with Thread Pools</h2>
-                    <p class="post-meta">Posted on May 17, 2025 by Author</p>
-                    <div class="post-content">
-                        <h3>Why Java Concurrency Matters</h3>
-                        <p>Java’s concurrency utilities, introduced in <strong>Java 5</strong>, provide tools for managing multithreaded apps.</p>
-                        <!-- ... -->
-                    </div>
-                    <a href="/" class="btn btn-neubrutalist mt-3">Back to Home</a>
+                    <h2 th:text="${post.title}">title</h2>
+                    <p th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}" class="post-meta"></p>
+                    <div th:text="${post.content}" class="preserve-whitespace"></div>
                 </div>
-
+                <!-- Comment Section -->
                 <div class="neubrutalist-card p-4 comment-section">
                     <h3>Comments</h3>
-                    <!-- comments... -->
+                    <div class="comment-item">
+                        <p><strong>Jane Doe</strong> | May 17, 2025</p>
+                        <p>Great explanation of thread pools! The example was super clear.</p>
+                    </div>
+                    <div class="comment-item">
+                        <p><strong>John Smith</strong> | May 17, 2025</p>
+                        <p>Thanks for the Java concurrency insights!</p>
+                    </div>
+                    <h4>Leave a Comment</h4>
                     <form>
-                        <!-- comment form... -->
+                        <div class="mb-3">
+                            <label for="comment-name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="comment-name" placeholder="Your name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="comment-text" class="form-label">Comment</label>
+                            <textarea class="form-control" id="comment-text" rows="4" placeholder="Your comment"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-neubrutalist">Submit</button>
                     </form>
                 </div>
             </div>
@@ -40,7 +52,7 @@
                     <ul class="list-unstyled">
                         <li><a th:href="@{/blog}" class="text-dark">Home</a></li>
                         <li><a th:href="@{/resume}" class="text-dark">Resume</a></li>
-                        <li><a th:href="@{/#contact}" class="text-dark">Contact</a></li>
+                        <li><a th:href="@{/contact}" class="text-dark">Contact</a></li>
                     </ul>
 
                     <h3>Subscribe</h3>
@@ -52,8 +64,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Removed inline <footer> — handled by layout -->
 
     <script>
         function copyCode() {

@@ -11,43 +11,46 @@
 <div layout:fragment="content">
 
     <div class="container">
-        <div class="neubrutalist-card p-4 mb-4">
-            <h2>Welcome to My Neubrutalist Blog</h2>
-            <p class="lead">Bold thoughts. Brutal honesty. Beautifully raw.</p>
-            <a th:href="@{/blog}" class="btn btn-neubrutalist mt-3">View All Posts</a>
-        </div>
-
-        <div class="row g-4 align-items-start">
-            <div class="col-md-8" th:if="${latestPost != null}">
-                <div class="neubrutalist-card p-3">
-                    <h3>Latest Post</h3>
-                    <h4 th:text="${latestPost.title}">Java Concurrency Demystified</h4>
-                    <p th:text="${latestPost.excerpt}">An overview of thread pools and how to optimize multithreaded applications...</p>
-                    <a th:href="@{'/post/' + ${latestPost.id}}" class="btn btn-neubrutalist">Read More</a>
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Blog Post 1 -->
+                <div class="neubrutalist-card p-4" th:each="post : ${postList}">
+                    <h2 th:text="${post.title}"></h2>
+                    <p th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}" class="post-meta"></p>
+                    <p th:utext="${post.intro}"></p>
+                    <a th:href="@{'/blog/details/' + ${post.id}}" class="btn btn-neubrutalist">Read More</a>
                 </div>
-            </div>
+                <!-- Blog Post 2 -->
 
-            <!-- Optional fallback if no post found -->
-            <div class="col-md-6" th:unless="${latestPost != null}">
-                <div class="neubrutalist-card p-3">
-                    <h3>Latest Post</h3>
-                    <p>No recent post available.</p>
-                </div>
+                <!-- Pagination -->
+                <nav aria-label="Blog pagination">
+                    <ul class="pagination pagination-neubrutalist justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">Previous</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <div class="sidebar">
+                    <h3>About Me</h3>
+                    <p th:text="${personalInfo.aboutMe}">John Doe</p>
                     <h3>Navigation</h3>
                     <ul class="list-unstyled">
-                        <li><a th:href="@{/}" class="text-dark">Home</a></li>
-                        <li><a th:href="@{/resume}" class="text-dark">Resume</a></li>
-                        <li><a th:href="@{/#contact}" class="text-dark">Contact</a></li>
+                        <li><a href="/blog" class="text-dark">Home</a></li>
+                        <li><a href="/resume" class="text-dark">Resume</a></li>
+                        <li><a href="/contact" class="text-dark">Contact</a></li>
                     </ul>
-
                     <h3>Subscribe</h3>
                     <form>
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Email address">
+                            <input type="email" class="form-control" placeholder="Email address" aria-label="Email">
                         </div>
                         <button type="submit" class="btn btn-neubrutalist">Subscribe</button>
                     </form>
