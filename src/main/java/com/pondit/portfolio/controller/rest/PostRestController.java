@@ -4,10 +4,10 @@ import com.pondit.portfolio.exception.custom.NotFoundException;
 import com.pondit.portfolio.model.domain.Post;
 import com.pondit.portfolio.model.dto.CreatePostRequest;
 import com.pondit.portfolio.model.dto.UpdatePostRequest;
-import com.pondit.portfolio.model.dto.UpdateProjectRequest;
 import com.pondit.portfolio.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
@@ -30,13 +30,13 @@ public class PostRestController {
 
     @Operation(summary = "Create a new post")
     @PostMapping
-    public void createPost(CreatePostRequest createPostRequest) {
+    public void createPost(@Valid @RequestBody CreatePostRequest createPostRequest) {
        postService.create(createPostRequest);
     }
 
     @Operation(summary = "Update a post by id")
     @PutMapping("{id}")
-    public void updateProject(@PathVariable Long id, @RequestBody UpdatePostRequest request) throws NotFoundException {
+    public void updateProject(@PathVariable Long id,@Valid @RequestBody UpdatePostRequest request) throws NotFoundException {
         postService.update(id, request);
     }
 
