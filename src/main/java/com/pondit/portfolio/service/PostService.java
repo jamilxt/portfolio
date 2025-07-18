@@ -31,6 +31,11 @@ public class PostService {
         return entityList.stream().map(postMapper::entityToDomain).toList();
     }
 
+    public List<Post> getLatestPublishedPosts(Pageable pageable) {
+        List<PostEntity> entityList = postRepository.findTopByPublishedIsTrueOrderByPublishedAtDesc(pageable);
+        return entityList.stream().map(postMapper::entityToDomain).toList();
+    }
+
     public Long create(CreatePostRequest request) {
         var entityToSave = postMapper.createRequestToEntity(request);
         entityToSave.setIntro(generateIntro(entityToSave.getContent()));
