@@ -9,55 +9,41 @@
 </head>
 <body>
 <div layout:fragment="content">
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8">
-            <!-- Blog Post 1 -->
-            <div class="neubrutalist-card p-4" th:each="post : ${postList}">
-                <h2 th:text="${post.title}"></h2>
-                <p th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}" class="post-meta"></p>
-                <p th:utext="${post.intro}"></p>
-                <a th:href="@{'/blog/details/' + ${post.id}}" class="btn btn-neubrutalist">Read More</a>
-            </div>
-            <!-- Blog Post 2 -->
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <!-- Blog Post 1 -->
+                <!-- Blog Post -->
                 <div class="neubrutalist-card p-4" th:each="post : ${postList}">
                     <h2 th:text="${post.title}"></h2>
                     <p th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}" class="post-meta"></p>
                     <p th:utext="${post.intro}"></p>
                     <a th:href="@{'/blog/details/' + ${post.id}}" class="btn btn-neubrutalist">Read More</a>
                 </div>
-                <!-- Blog Post 2 -->
 
                 <!-- Pagination -->
                 <nav aria-label="Blog pagination">
                     <ul class="pagination pagination-neubrutalist justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">Previous</a>
-                        </li>
+                        <li class="page-item"><a class="page-link" href="#" aria-label="Previous">Previous</a></li>
                         <li class="page-item active"><a class="page-link" href="#">1</a></li>
                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                         <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">Next</a>
-                        </li>
+                        <li class="page-item"><a class="page-link" href="#" aria-label="Next">Next</a></li>
                     </ul>
                 </nav>
             </div>
+
             <div class="col-lg-4">
                 <div class="sidebar">
                     <h3>About Me</h3>
                     <p th:text="${personalInfo.aboutMe}">John Doe</p>
+
                     <h3>Navigation</h3>
                     <ul class="list-unstyled">
                         <li><a href="/blog" class="text-dark">Home</a></li>
                         <li><a href="/resume" class="text-dark">Resume</a></li>
                         <li><a href="/contact" class="text-dark">Contact</a></li>
                     </ul>
+
                     <h3>Subscribe</h3>
                     <form>
                         <div class="mb-3">
@@ -65,11 +51,10 @@
                         </div>
                         <button type="submit" class="btn btn-neubrutalist">Subscribe</button>
                     </form>
-
+                </div>
             </div>
         </div>
     </div>
-
 </div>
 </body>
 </html>

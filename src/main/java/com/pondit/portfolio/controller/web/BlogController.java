@@ -1,6 +1,7 @@
 package com.pondit.portfolio.controller.web;
 
 import com.pondit.portfolio.config.ResumeConfig;
+import com.pondit.portfolio.exception.custom.NotFoundException;
 import com.pondit.portfolio.model.domain.Post;
 import com.pondit.portfolio.persistence.entity.PostEntity;
 import com.pondit.portfolio.persistence.repository.PostRepository;
@@ -37,6 +38,13 @@ public class BlogController {
         model.addAttribute("personalInfo", resumeConfig.getPersonalInfo());
         model.addAttribute("latestPost", latestPost);
         return "blog/index";
+    }
+
+    @GetMapping("/blog/details/{id}")
+    public String getPostDetails(@PathVariable Long id, Model model) throws NotFoundException {
+        Post post = postService.getById(id);
+        model.addAttribute("post", post);
+        return "blog/detail";
     }
 
     @GetMapping("{slug}")
