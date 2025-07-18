@@ -10,5 +10,7 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<PostEntity, Long> {
     Page<PostEntity> findAllByPublishedIsTrue(Pageable pageable);
 
+    boolean existsBySlug(String slug);
+
     List<PostEntity> findTopByPublishedIsTrueOrderByPublishedAtDesc(Pageable pageable);
 }

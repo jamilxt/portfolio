@@ -10,6 +10,17 @@
 <body>
 <div layout:fragment="content">
 
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Blog Post 1 -->
+            <div class="neubrutalist-card p-4" th:each="post : ${postList}">
+                <h2 th:text="${post.title}"></h2>
+                <p th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}" class="post-meta"></p>
+                <p th:utext="${post.intro}"></p>
+                <a th:href="@{'/blog/details/' + ${post.id}}" class="btn btn-neubrutalist">Read More</a>
+            </div>
+            <!-- Blog Post 2 -->
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
@@ -54,7 +65,7 @@
                         </div>
                         <button type="submit" class="btn btn-neubrutalist">Subscribe</button>
                     </form>
-                </div>
+
             </div>
         </div>
     </div>
