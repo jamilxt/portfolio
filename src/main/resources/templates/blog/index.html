@@ -109,15 +109,25 @@
             <!-- Pagination -->
             <nav aria-label="Blog pagination">
                 <ul class="pagination pagination-neubrutalist justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">Previous</a>
+
+                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{|?page=${currentPage - 1}|}"
+                           aria-label="Previous">Previous</a>
                     </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">Next</a>
+                    <li class="page-item"
+                        th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                        th:classappend="${i == currentPage} ? 'active'">
+                        <a class="page-link"
+                           th:href="@{|?page=${i}|}"
+                           th:text="${i + 1}"></a>
                     </li>
+                    <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{|?page=${currentPage + 1}|}"
+                           aria-label="Next">Next</a>
+                    </li>
+
                 </ul>
             </nav>
         </div>
