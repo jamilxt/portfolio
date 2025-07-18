@@ -2,56 +2,56 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout_blog}">
+      layout:decorate="~{layout_blog.html}">
+
 <head>
-    <layout:fragment th:name="title">Home</layout:fragment>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <layout:fragment th:name="title">Blog - Neubrutalist</layout:fragment>
 </head>
+
 <body>
 <div layout:fragment="content">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <!-- Blog Post -->
-                <div class="neubrutalist-card p-4" th:each="post : ${postList}">
-                    <h2 th:text="${post.title}"></h2>
-                    <p th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}" class="post-meta"></p>
-                    <p th:utext="${post.intro}"></p>
-                    <a th:href="@{'/blog/details/' + ${post.id}}" class="btn btn-neubrutalist">Read More</a>
-                </div>
-
-                <!-- Pagination -->
-                <nav aria-label="Blog pagination">
-                    <ul class="pagination pagination-neubrutalist justify-content-center">
-                        <li class="page-item"><a class="page-link" href="#" aria-label="Previous">Previous</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#" aria-label="Next">Next</a></li>
-                    </ul>
-                </nav>
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Blog Posts -->
+            <div class="neubrutalist-card p-4 mb-4" th:each="post : ${postList}">
+                <h2 th:text="${post.title}"></h2>
+                <p class="text-muted" th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}"></p>
+                <p th:utext="${post.intro}"></p>
+                <a th:href="@{'/blog/details/' + ${post.id}}" class="btn btn-neubrutalist">Read More</a>
             </div>
 
-            <div class="col-lg-4">
-                <div class="sidebar">
-                    <h3>About Me</h3>
-                    <p th:text="${personalInfo.aboutMe}">John Doe</p>
+            <!-- Pagination -->
+            <nav aria-label="Blog pagination">
+                <ul class="pagination pagination-neubrutalist justify-content-center">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
 
-                    <h3>Navigation</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="/blog" class="text-dark">Home</a></li>
-                        <li><a href="/resume" class="text-dark">Resume</a></li>
-                        <li><a href="/contact" class="text-dark">Contact</a></li>
-                    </ul>
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <div class="sidebar">
+                <h3>About Me</h3>
+                <p th:text="${personalInfo.aboutMe}">John Doe</p>
 
-                    <h3>Subscribe</h3>
-                    <form>
-                        <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Email address" aria-label="Email">
-                        </div>
-                        <button type="submit" class="btn btn-neubrutalist">Subscribe</button>
-                    </form>
-                </div>
+                <h3>Navigation</h3>
+                <ul class="list-unstyled">
+                    <li><a href="/blog" class="text-dark">Home</a></li>
+                    <li><a href="/resume" class="text-dark">Resume</a></li>
+                    <li><a href="/contact" class="text-dark">Contact</a></li>
+                </ul>
+
+                <h3>Subscribe</h3>
+                <form>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="Email address">
+                    </div>
+                    <button type="submit" class="btn btn-neubrutalist">Subscribe</button>
+                </form>
             </div>
         </div>
     </div>

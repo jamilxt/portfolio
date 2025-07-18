@@ -3,81 +3,17 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout_resume}">
+
+<!-- Title and styles go to layout_resume.html -->
 <head>
     <layout:fragment th:name="title" th:text="${siteTitle}">Resume</layout:fragment>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <layout:fragment th:name="styles">
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </layout:fragment>
 </head>
+
 <body>
 <div layout:fragment="content">
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8">
-            <!-- Personal Info -->
-            <div class="neubrutalist-card p-4 resume-section">
-                <h2>Personal Info</h2>
-                <p><strong>Name:</strong> <span th:text="${personalInfo.name}">John Doe</span></p>
-                <p><strong>Email:</strong> <span th:text="${personalInfo.email}">john.doe@example.com</span></p>
-                <p><strong>LinkedIn:</strong> <a th:href="${personalInfo.linkedinUrl}" th:text="${personalInfo.linkedinUrl}" class="text-dark">linkedin.com/in/johndoe</a></p>
-                <p><strong>GitHub:</strong> <a th:href="${personalInfo.githubUrl}" th:text="${personalInfo.githubUrl}" class="text-dark">github.com/johndoe</a></p>
-            </div>
-            <!-- Education -->
-            <div class="neubrutalist-card p-4 resume-section">
-                <h2>Education</h2>
-                <div class="resume-item" th:each="edu : ${education}">
-                    <h4 th:text="${edu.degree}">B.S. in Computer Science</h4>
-                    <p><strong th:text="${edu.institution}">University of Example</strong> | <span th:text="${edu.years}">2018 - 2022</span></p>
-                    <p th:text="${edu.description}">Graduated with honors, focusing on software engineering and distributed systems.</p>
-                </div>
-            </div>
-            <!-- Experience -->
-            <div class="neubrutalist-card p-4 resume-section">
-                <h2>Experience</h2>
-                <div class="resume-item" th:each="exp : ${experience}">
-                    <h4 th:text="${exp.title}">Software Engineer</h4>
-                    <p><strong th:text="${exp.company}">Tech Corp</strong> | <span th:text="${exp.years}">2022 - Present</span></p>
-                    <p th:text="${exp.description}">Developed scalable backend systems using Spring Boot and microservices architecture.</p>
-                </div>
-            </div>
-            <!-- Skills -->
-            <div class="neubrutalist-card p-4 resume-section">
-                <h2>Skills</h2>
-                <ul class="skills-list">
-                    <li th:each="skill : ${skills}" th:text="${skill}">Java</li>
-                </ul>
-            </div>
-            <!-- Projects -->
-            <div class="neubrutalist-card p-4 resume-section">
-                <h2>Projects</h2>
-                <div class="resume-item" th:each="project : ${projects}">
-                    <h4 th:text="${project.name}">Personal Portfolio</h4>
-                    <p th:text="${project.description}">Developed Personal Portfolio & Blog Management System using Spring Boot and monolith architecture.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="sidebar">
-                <h3>Navigation</h3>
-                <ul class="list-unstyled">
-                    <li><a href="/" class="text-dark">Home</a></li>
-                    <li><a href="/resume" class="text-dark">Resume</a></li>
-                    <li><a href="/#contact" class="text-dark">Contact</a></li>
-                </ul>
-                <h3>Subscribe</h3>
-
-                <form>
-                    <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Email address" aria-label="Email">
-                    </div>
-                    <button type="submit" class="btn btn-neubrutalist">Subscribe</button>
-                    <a href="/resume/download" class="btn btn-neubrutalist mt-3 d-block text-center">
-                        Download Resume (PDF)
-                    </a>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
@@ -89,24 +25,27 @@
                     <p><strong>LinkedIn:</strong> <a th:href="${personalInfo.linkedinUrl}" th:text="${personalInfo.linkedinUrl}" class="text-dark">linkedin.com/in/johndoe</a></p>
                     <p><strong>GitHub:</strong> <a th:href="${personalInfo.githubUrl}" th:text="${personalInfo.githubUrl}" class="text-dark">github.com/johndoe</a></p>
                 </div>
+
                 <!-- Education -->
                 <div class="neubrutalist-card p-4 resume-section">
                     <h2>Education</h2>
                     <div class="resume-item" th:each="edu : ${education}">
                         <h4 th:text="${edu.degree}">B.S. in Computer Science</h4>
                         <p><strong th:text="${edu.institution}">University of Example</strong> | <span th:text="${edu.years}">2018 - 2022</span></p>
-                        <p th:text="${edu.description}">Graduated with honors, focusing on software engineering and distributed systems.</p>
+                        <p th:text="${edu.description}">Graduated with honors...</p>
                     </div>
                 </div>
+
                 <!-- Experience -->
                 <div class="neubrutalist-card p-4 resume-section">
                     <h2>Experience</h2>
                     <div class="resume-item" th:each="exp : ${experience}">
                         <h4 th:text="${exp.title}">Software Engineer</h4>
                         <p><strong th:text="${exp.company}">Tech Corp</strong> | <span th:text="${exp.years}">2022 - Present</span></p>
-                        <p th:text="${exp.description}">Developed scalable backend systems using Spring Boot and microservices architecture.</p>
+                        <p th:text="${exp.description}">Worked on scalable systems...</p>
                     </div>
                 </div>
+
                 <!-- Skills -->
                 <div class="neubrutalist-card p-4 resume-section">
                     <h2>Skills</h2>
@@ -114,15 +53,17 @@
                         <li th:each="skill : ${skills}" th:text="${skill}">Java</li>
                     </ul>
                 </div>
+
                 <!-- Projects -->
                 <div class="neubrutalist-card p-4 resume-section">
                     <h2>Projects</h2>
                     <div class="resume-item" th:each="project : ${projects}">
                         <h4 th:text="${project.name}">Personal Portfolio</h4>
-                        <p th:text="${project.description}">Developed Personal Portfolio & Blog Management System using Spring Boot and monolith architecture.</p>
+                        <p th:text="${project.description}">Spring Boot monolith system...</p>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-4">
                 <div class="sidebar">
                     <h3>Navigation</h3>
@@ -131,11 +72,11 @@
                         <li><a href="/resume" class="text-dark">Resume</a></li>
                         <li><a href="/contact" class="text-dark">Contact</a></li>
                     </ul>
-                    <h3>Subscribe</h3>
 
+                    <h3>Subscribe</h3>
                     <form>
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Email address" aria-label="Email">
+                            <input type="email" class="form-control" placeholder="Email address">
                         </div>
                         <button type="submit" class="btn btn-neubrutalist">Subscribe</button>
                         <a href="/resume/download" class="btn btn-neubrutalist mt-3 d-block text-center">
@@ -146,8 +87,6 @@
             </div>
         </div>
     </div>
-
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

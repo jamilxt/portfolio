@@ -2,73 +2,80 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout_blog}">
+      layout:decorate="~{layout_blog.html}">
+
 <head>
     <layout:fragment th:name="title">Post Details - Neubrutalist Blog</layout:fragment>
     <layout:fragment th:name="styles">
-        <link rel="stylesheet" th:href="@{/css/style.css}">
+        <link rel="stylesheet" th:href="@{/css/post.css}">
     </layout:fragment>
 </head>
 
 <body>
 <div layout:fragment="content">
-
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <!-- Post Content -->
-                <div class="neubrutalist-card p-4">
-                    <h2 th:text="${post.title}">title</h2>
-                    <p th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}" class="post-meta"></p>
-                    <div th:text="${post.content}" class="preserve-whitespace"></div>
-                </div>
-                <!-- Comment Section -->
-                <div class="neubrutalist-card p-4 comment-section">
-                    <h3>Comments</h3>
-                    <div class="comment-item">
-                        <p><strong>Jane Doe</strong> | May 17, 2025</p>
-                        <p>Great explanation of thread pools! The example was super clear.</p>
-                    </div>
-                    <div class="comment-item">
-                        <p><strong>John Smith</strong> | May 17, 2025</p>
-                        <p>Thanks for the Java concurrency insights!</p>
-                    </div>
-
-                </div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Post Content -->
+            <div class="neubrutalist-card p-4">
+                <h2 th:text="${post.title}">title</h2>
+                <p th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}" class="post-meta"></p>
+                <div th:text="${post.content}" class="preserve-whitespace"></div>
             </div>
-
-            <div class="col-lg-4">
-                <div class="sidebar">
-                    <h3>Navigation</h3>
-                    <ul class="list-unstyled">
-                        <li><a th:href="@{/blog}" class="text-dark">Home</a></li>
-                        <li><a th:href="@{/resume}" class="text-dark">Resume</a></li>
-                        <li><a th:href="@{/contact}" class="text-dark">Contact</a></li>
-                    </ul>
-
-                    <h3>Subscribe</h3>
-                    <form>
-                        <input type="email" class="form-control mb-3" placeholder="Email address">
-                        <button type="submit" class="btn btn-neubrutalist">Subscribe</button>
-                    </form>
+            <!-- Comment Section -->
+            <div class="neubrutalist-card p-4 comment-section">
+                <h3>Comments</h3>
+                <div class="comment-item">
+                    <p><strong>Jane Doe</strong> | May 17, 2025</p>
+                    <p>Great explanation of thread pools! The example was super clear.</p>
                 </div>
+                <div class="comment-item">
+                    <p><strong>John Smith</strong> | May 17, 2025</p>
+                    <p>Thanks for the Java concurrency insights!</p>
+                </div>
+                <h4>Leave a Comment</h4>
+                <form>
+                    <div class="mb-3">
+                        <label for="comment-name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="comment-name" placeholder="Your name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="comment-text" class="form-label">Comment</label>
+                        <textarea class="form-control" id="comment-text" rows="4" placeholder="Your comment"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-neubrutalist">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="sidebar">
+                <h3>Navigation</h3>
+                <ul class="list-unstyled">
+                    <li><a href="/" class="text-dark">Home</a></li>
+                    <li><a href="/resume" class="text-dark">Resume</a></li>
+                    <li><a href="/#contact" class="text-dark">Contact</a></li>
+                </ul>
+                <h3>Subscribe</h3>
+                <form>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="Email address" aria-label="Email">
+                    </div>
+                    <button type="submit" class="btn btn-neubrutalist">Subscribe</button>
+                </form>
             </div>
         </div>
     </div>
-
-
-
-    <script>
-        function copyCode() {
-            const code = document.querySelector('pre code')?.innerText || '';
-            navigator.clipboard.writeText(code).then(() => {
-                alert('Code copied to clipboard!');
-            }).catch(err => {
-                console.error('Failed to copy code:', err);
-            });
-        }
-    </script>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+    function copyCode() {
+        const code = document.querySelector('pre code').innerText;
+        navigator.clipboard.write(code).then(() => {
+            alert('Code copied to clipboard!');
+        }).catch(err => {
+            console.error('Failed to copy code: ', err);
+        });
+    }
+</script>
 </body>
 </html>
