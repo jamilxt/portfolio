@@ -25,7 +25,7 @@ public class PostEntity {
     private String content;
 
     @Setter
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String slug;
 
     @Setter

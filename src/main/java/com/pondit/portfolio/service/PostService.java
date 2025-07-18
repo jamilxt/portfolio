@@ -58,6 +58,12 @@ public class PostService {
         return postMapper.entityToDomain(postEntity);
     }
 
+    public Post getBySlug(String slug) throws NotFoundException {
+        var postEntity = this.findEntityBySlug(slug);
+        System.out.println(postEntity.getTitle());
+        return postMapper.entityToDomain(postEntity);
+    }
+
     public void update(Long id, UpdatePostRequest request) throws NotFoundException {
         PostEntity postEntity = this.findEntityById(id);
         PostEntity updatedPostEntity = postMapper.updateRequestToEntity(request, postEntity);
@@ -81,6 +87,11 @@ public class PostService {
     private PostEntity findEntityById(Long id) throws  NotFoundException {
         return postRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Post not found"));
+    }
+
+    public PostEntity findEntityBySlug(String slug) throws NotFoundException {
+        return postRepository.findBySlug(slug)
+                .orElseThrow(() -> new NotFoundException("Post not found with slug: " + slug));
     }
 
     private String generateIntro(String content) {
