@@ -98,12 +98,11 @@
     <div class="row">
         <div class="col-lg-8">
             <!-- Blog Post 1 -->
-            <div class="neubrutalist-card p-4" th:each="post : ${postList}" >
+            <div class="neubrutalist-card p-4" th:each="post : ${postList}">
                 <h2 th:text="${post.title}"></h2>
                 <p th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}" class="post-meta"></p>
-                <p th:text="${post.content}"></p>
-                <a href="blog/post-details" class="btn btn-neubrutalist">Read More</a>
-
+                <p th:utext="${post.intro}"></p>
+                <a th:href="@{'/blog/details/' + ${post.id}}" class="btn btn-neubrutalist">Read More</a>
                 <h4 class="mt-4 text-sm text-gray-600">
                     Comments: <span th:text="${commentList[post.id]?.size()}">0</span>
                 </h4>
@@ -115,8 +114,8 @@
                 <div class="mt-4 p-4 bg-white rounded-lg shadow border border-gray-200">
                     <form th:action="@{/blog/comment}" method="post" class="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
                     <textarea name="content" placeholder="Write a comment..." required
-                  class="w-full sm:w-3/4 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 resize-none"
-                  rows="2"></textarea>
+                              class="w-full sm:w-3/4 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 resize-none"
+                              rows="2"></textarea>
                         <input type="hidden" name="postId" th:value="${post.id}" />
                         <button type="submit"
                                 class="btn btn-neubrutalist mt-2">
@@ -129,9 +128,6 @@
                         </button>
                     </form>
                 </div>
-
-
-
             </div>
             <!-- Blog Post 2 -->
 

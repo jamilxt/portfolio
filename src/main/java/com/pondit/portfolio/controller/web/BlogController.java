@@ -2,6 +2,7 @@ package com.pondit.portfolio.controller.web;
 
 import com.pondit.portfolio.config.ResumeConfig;
 import com.pondit.portfolio.exception.custom.NotFoundException;
+import com.pondit.portfolio.exception.custom.NotFoundException;
 import com.pondit.portfolio.model.domain.Comment;
 import com.pondit.portfolio.model.domain.Post;
 import com.pondit.portfolio.model.dto.CreateCommentRequest;
@@ -45,12 +46,18 @@ public class BlogController {
         return "blog/index";
     }
 
+    @GetMapping("/blog/details/{id}")
+    public String getPostDetails(@PathVariable Long id, Model model) throws NotFoundException {
+        Post post = postService.getById(id);
+        model.addAttribute("post", post);
+        return "blog/detail";
+    }
+
     @PostMapping("/comment")
     public String addComment(@ModelAttribute CreateCommentRequest request) throws NotFoundException {
         commentService.createComment(request);
         return "redirect:/blog";
     }
-
 
     @GetMapping("{slug}")
     public String detailPage(@PathVariable String slug) {
