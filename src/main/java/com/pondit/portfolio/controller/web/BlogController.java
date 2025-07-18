@@ -32,15 +32,10 @@ public class BlogController {
         return "blog/index";
     }
 
-    @GetMapping("/blog/details/{id}")
-    public String getPostDetails(@PathVariable Long id, Model model) throws NotFoundException {
-        Post post = postService.getById(id);
+    @GetMapping("/details/{slug}")
+    public String detailPage(@PathVariable String slug, Model model) throws NotFoundException {
+        Post post = postService.getBySlug(slug);
         model.addAttribute("post", post);
-        return "blog/detail";
-    }
-
-    @GetMapping("{slug}")
-    public String detailPage(@PathVariable String slug) {
         return "blog/detail";
     }
 }
