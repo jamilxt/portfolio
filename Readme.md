@@ -1,5 +1,6 @@
 # Portfolio
-Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
+## Personal Portfolio Project using Java & Spring Boot for Pondits (Batch 7)
+<img width="100%" alt="image" src="https://github.com/user-attachments/assets/5a6ebecf-0446-4db5-8c47-41899529d948" />
 
 ## Live Preview:
 **Environment:** Develop 
@@ -52,7 +53,7 @@ Environment: Production (not yet)
 - [ ] REST API
     - [X] /api/projects (CRUD for Projects)
     - [ ] Secure Endpoints
-    - [ ] Input Validation
+    - [x] Input Validation
     - [x] API Documentation: Swagger
     - [x] API Paging and Sorting
 - [x] application.properties
