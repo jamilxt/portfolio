@@ -1,0 +1,38 @@
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+#accordionSidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+#accordionSidebar::-webkit-scrollbar-track {
+    background: #1e1e2f;
+    /* Dark background to match sidebar */
+}
+
+#accordionSidebar::-webkit-scrollbar-thumb {
+    background-color: #4e73df;
+    /* Vibrant color for the scrollbar */
+    border-radius: 3px;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.header_container {
+  position: fixed;
+  top: 0;
+  left: 220px; /* same as sidebar width */
+  right: 0;
+  height: 56px; /* adjust to your header height */
+  background: white;
+  z-index: 1020;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
