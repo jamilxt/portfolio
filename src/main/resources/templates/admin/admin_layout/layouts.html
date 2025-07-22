@@ -15,8 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700,900" rel="stylesheet">
 
     <!-- Styles -->
-    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
-    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/admin/sb-admin-2.min.css}" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -30,18 +29,18 @@
             <th:block th:replace="~{admin/admin_layout/sidebar.html :: sidebar}"></th:block>
 
             <!-- Content Wrapper -->
-            <div id="content-wrapper" class="d-flex flex-column" style="margin-left: 220px;">
+            <div id="content-wrapper">
 
                 <!-- Main Content -->
                 <div id="content" class="flex-grow-1">
 
-                    <div class="header_container">
+                    <!-- <div class="header_container"> -->
                         <!-- Header -->
                         <th:block th:replace="~{admin/admin_layout/header.html :: header}"></th:block>
-                    </div>
+                    <!-- </div> -->
 
                     <!-- Page Content -->
-                    <div layout:fragment="content_body" style="padding-top: 90px; padding-bottom: 20px;"></div>
+                    <div layout:fragment="content_body"></div>
 
                 </div>
 
