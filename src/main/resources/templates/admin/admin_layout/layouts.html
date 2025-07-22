@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Dashboard</title>
+
+    <!-- Fonts -->
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700,900" rel="stylesheet">
+
+    <!-- Styles -->
+    <link th:href="@{/css/admin/sb-admin-2.min.css}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+    <div layout:fragment="layout"> <!-- Whole layout marked as fragment -->
+
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+
+            <!-- Sidebar -->
+            <th:block th:replace="~{admin/admin_layout/sidebar.html :: sidebar}"></th:block>
+
+            <!-- Content Wrapper -->
+            <div id="content-wrapper">
+
+                <!-- Main Content -->
+                <div id="content" class="flex-grow-1">
+
+                    <!-- <div class="header_container"> -->
+                        <!-- Header -->
+                        <th:block th:replace="~{admin/admin_layout/header.html :: header}"></th:block>
+                    <!-- </div> -->
+
+                    <!-- Page Content -->
+                    <div layout:fragment="content_body"></div>
+
+                </div>
+
+                <!-- Footer -->
+                <th:block th:replace="~{admin/admin_layout/footer.html :: footer}"></th:block>
+
+            </div>
+            <!-- End of Content Wrapper -->
+
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <!-- Scroll to Top -->
+        <a class="scroll-to-top rounded" href="#page-top" style="position: fixed; bottom: 20px; right: 20px; z-index: 1030;">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Logout Modal -->
+        <th:block th:replace="~{admin/admin_layout/logout_modal.html :: logout_modal}"></th:block>
+
+        <!-- Scripts -->
+        <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+        <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+        <script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+        <!-- Page level plugins -->
+        <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+        <script th:src="@{/js/demo/chart-area-demo.js}"></script>
+        <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+
+        <script>
+            document.getElementById('accordionSidebar').addEventListener('wheel', function(e) {
+                this.scrollTop += e.deltaY;
+                e.preventDefault(); // prevent scrolling the body/content
+            }, { passive: false });
+
+            document.getElementById('copyright_year').textContent = new Date().getFullYear();
+        </script>
+    </div>
+</body>
+
+</html>
