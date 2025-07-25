@@ -104,10 +104,9 @@
                 <p th:utext="${post.intro}"></p>
                 <a th:href="@{'/blog/details/' + ${post.slug}}" class="btn btn-neubrutalist">Read More</a>
             </div>
-            <!-- Blog Post 2 -->
 
             <!-- Pagination -->
-            <nav aria-label="Blog pagination">
+            <nav aria-label="Blog pagination" th:if="${totalPages > 0 and currentPage < totalPages}">
                 <ul class="pagination pagination-neubrutalist justify-content-center">
 
                     <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
@@ -152,6 +151,11 @@
 
                 </ul>
             </nav>
+            <div th:if="${totalPages == 0 or currentPage >= totalPages}">
+                <h3 class="text-center text-muted">No posts found.</h3>
+            </div>
+
+
         </div>
         <div class="col-lg-4">
             <div class="sidebar">
