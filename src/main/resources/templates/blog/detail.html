@@ -6,7 +6,6 @@
 
 <head>
     <title layout:fragment="title">Post Details - Neubrutalist Blog</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
@@ -70,23 +69,5 @@
         </div>
     </div>
 </div>
-
-<!-- Script Fragment -->
-<div layout:fragment="scripts">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
-    <script>
-        function copyCode() {
-            const code = document.querySelector('pre code').innerText;
-            navigator.clipboard.writeText(code).then(() => {
-                alert('Code copied to clipboard!');
-            }).catch(err => {
-                console.error('Failed to copy code: ', err);
-            });
-        }
-    </script>
-</div>
-
 </body>
 </html>
