@@ -104,10 +104,9 @@
                 <p th:utext="${post.intro}"></p>
                 <a th:href="@{'/blog/details/' + ${post.slug}}" class="btn btn-neubrutalist">Read More</a>
             </div>
-            <!-- Blog Post 2 -->
 
             <!-- Pagination -->
-            <nav aria-label="Blog pagination">
+            <nav aria-label="Blog pagination" th:if="${totalPages > 0 and currentPage < totalPages}">
                 <ul class="pagination pagination-neubrutalist justify-content-center">
 
                     <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
@@ -115,12 +114,34 @@
                            th:href="@{|?page=${currentPage - 1}|}"
                            aria-label="Previous">Previous</a>
                     </li>
+
+                    <li class="page-item" th:if="${currentPage>2}">
+                        <a class="page-link"
+                           th:href="@{|?page=0|}"
+                           th:text="'1'"></a>
+                    </li>
+
+                    <li class="page-item disabled" th:if="${currentPage > 3}">
+                        <spa class="page-link">...</spa>
+                    </li>
+
                     <li class="page-item"
-                        th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                        th:each="i : ${#numbers.sequence(currentPage - 2, currentPage + 2)}"
+                        th:if="${i >= 0 and i < totalPages}"
                         th:classappend="${i == currentPage} ? 'active'">
                         <a class="page-link"
                            th:href="@{|?page=${i}|}"
                            th:text="${i + 1}"></a>
+                    </li>
+
+                    <li class="page-item disabled" th:if="${totalPages - 1 > currentPage+2}">
+                        <spa class="page-link">...</spa>
+                    </li>
+
+                    <li class="page-item" th:if="${currentPage + 2 < totalPages - 1}">
+                        <a class="page-link"
+                           th:href="@{|?page=${totalPages - 1}|}"
+                           th:text="${totalPages}"></a>
                     </li>
                     <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
                         <a class="page-link"
@@ -130,6 +151,11 @@
 
                 </ul>
             </nav>
+            <div th:if="${totalPages == 0 or currentPage >= totalPages}">
+                <h3 class="text-center text-muted">No posts found.</h3>
+            </div>
+
+
         </div>
         <div class="col-lg-4">
             <div class="sidebar">
