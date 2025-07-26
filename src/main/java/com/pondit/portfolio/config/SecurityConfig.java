@@ -9,13 +9,27 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception {
         http
+                .securityMatcher("/admin/**")
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/admin/**").authenticated()
                         .anyRequest().permitAll()
                 )
-                .formLogin(Customizer.withDefaults());
+                .formLogin(formLogin ->
+                        formLogin.loginPage("/admin/login"));
+        return http.build();
+    }
+
+    @Bean
+    public SecurityFilterChain restApiSecurityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .securityMatcher("/api/**")
+                .authorizeHttpRequests(requests -> requests
+                        .requestMatchers("/api/**").authenticated()
+                )
+                // TODO: apply JWT Token - Use Custom Filter
+                .httpBasic(Customizer.withDefaults());
         return http.build();
     }
 }
