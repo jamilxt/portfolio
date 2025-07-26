@@ -131,30 +131,6 @@
                 <p th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}" class="post-meta"></p>
                 <div th:text="${post.content}" class="preserve-whitespace"></div>
             </div>
-            <!-- Comment Section -->
-            <div class="neubrutalist-card p-4 comment-section">
-                <h3>Comments</h3>
-                <div class="comment-item">
-                    <p><strong>Jane Doe</strong> | May 17, 2025</p>
-                    <p>Great explanation of thread pools! The example was super clear.</p>
-                </div>
-                <div class="comment-item">
-                    <p><strong>John Smith</strong> | May 17, 2025</p>
-                    <p>Thanks for the Java concurrency insights!</p>
-                </div>
-                <h4>Leave a Comment</h4>
-                <form>
-                    <div class="mb-3">
-                        <label for="comment-name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="comment-name" placeholder="Your name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="comment-text" class="form-label">Comment</label>
-                        <textarea class="form-control" id="comment-text" rows="4" placeholder="Your comment"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-neubrutalist">Submit</button>
-                </form>
-            </div>
         </div>
         <div class="col-lg-4">
             <div class="sidebar">
