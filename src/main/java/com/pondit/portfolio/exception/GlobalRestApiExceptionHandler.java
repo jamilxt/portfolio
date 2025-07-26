@@ -8,7 +8,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-import java.net.URI;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -19,8 +18,6 @@ public class GlobalRestApiExceptionHandler {
         log.error("Resource not found: {}", e.getMessage());
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
         problemDetail.setTitle("Resource Not Found");
-        problemDetail.setType(URI.create("https://example.com/not-found"));
-        problemDetail.setProperty("customProperty", "This is a custom property");
         return problemDetail;
     }
 
@@ -47,5 +44,4 @@ public class GlobalRestApiExceptionHandler {
         );
         return problemDetail;
     }
-
 }
