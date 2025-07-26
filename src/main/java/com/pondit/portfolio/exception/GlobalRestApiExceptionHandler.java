@@ -30,12 +30,6 @@ public class GlobalRestApiExceptionHandler {
         return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Invalid Input Type");
     }
 
-    @ExceptionHandler(Exception.class)
-    public ProblemDetail handleGenericException(Exception e) {
-        log.error("Generic Exception: ", e);
-        return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong");
-    }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleValidationExceptions(MethodArgumentNotValidException e) {
         log.error("Validation failed: {}", e.getMessage());
