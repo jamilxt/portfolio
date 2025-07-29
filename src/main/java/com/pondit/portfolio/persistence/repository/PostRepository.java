@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PostRepository extends JpaRepository<PostEntity, Long> {
     Page<PostEntity> findAllByPublishedIsTrue(Pageable pageable);
+    Page<PostEntity> findAllByPublishedFalse(Pageable pageable);
 
     boolean existsBySlug(String slug);
 

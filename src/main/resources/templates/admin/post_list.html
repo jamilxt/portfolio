@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html layout:decorate="~{admin/admin_layout/layouts.html}">
+
+<div layout:fragment="content_body">
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        </div>
+
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+            <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                For more information about DataTables, please visit the <a target="_blank"
+                    href="https://datatables.net">official DataTables documentation</a>.</p>
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Post Title</th>
+                                    <th>Intro</th>
+                                    <th>Published?</th>
+                                    <th>Published At</th>
+                                    <th>Author</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="post : ${postList}">
+                                    <td th:text="${post.title}">Tiger Nixon</td>
+                                    <td th:utext="${post.intro}">System Architect</td>
+                                    <td>Java B-7</td>
+                                    <td th:utext="${post.published}">Edinburgh</td>
+                                    <td th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}">61</td>
+                                    <td>
+                                        <a th:href="@{'/blog/details/' + ${post.slug}}" class="btn btn-info btn-sm" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a th:href="@{'/swagger-ui/index.html'}" class="btn btn-warning btn-sm mx-1" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a th:href="@{'/swagger-ui/index.html}" class="btn btn-danger btn-sm" title="Delete" onclick="return confirm('Are you sure you want to delete this post?');">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</html>

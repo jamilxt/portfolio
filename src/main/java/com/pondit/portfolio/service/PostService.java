@@ -29,11 +29,21 @@ public class PostService {
         return entityList.stream().map(postMapper::entityToDomain).toList();
     }
 
+    public List<Post> getAllPostsPublished(Pageable pageable) {
+        List<PostEntity> entityList = postRepository.findAllByPublishedIsTrue(pageable).getContent();
+        return entityList.stream().map(postMapper::entityToDomain).toList();
+    }
+
+    public List<Post> getAllPostsPending(Pageable pageable) {
+        List<PostEntity> entityList = postRepository.findAllByPublishedFalse(pageable).getContent();
+        return entityList.stream().map(postMapper::entityToDomain).toList();
+    }
+
     public Page<Post> getAllPublishedPosts(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "publishedAt"));
         var entityPage = postRepository.findAllByPublishedIsTrue(pageable);
         return entityPage.map(postMapper::entityToDomain);
-    }
+    }   
 
     public Long create(CreatePostRequest request) {
         var entityToSave = postMapper.createRequestToEntity(request);
