@@ -9,7 +9,8 @@
 
 **Frontend (Web):** (Under development)
 
-**Frontend (Mobile):** (Under development)
+**Frontend (Mobile):**
+[Flutter](https://github.com/Didar1313/personal_blog)
 
 ---
 Environment: Production (not yet)
