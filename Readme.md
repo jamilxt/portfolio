@@ -45,14 +45,14 @@ Environment: Production (not yet)
     - [x] Bean
     - [x] DispatcherServlet
     - [ ] Interceptor 
-    - [ ] Filter
+    - [x] Filter
 - [x] Server-Side (using Template Engine)
     - [x] / (Portfolio Homepage)
     - [x] Practice Thymeleaf Tags (e.g. th:if, th:each, etc.)
-    - [ ] Thymeleaf Fragment & Layouts (Reusability)
+    - [x] Thymeleaf Fragment & Layouts (Reusability)
 - [ ] REST API
     - [X] /api/projects (CRUD for Projects)
-    - [ ] Secure Endpoints
+    - [x] Secure Endpoints
     - [x] Input Validation
     - [x] API Documentation: Swagger
     - [x] API Paging and Sorting
@@ -89,15 +89,15 @@ Environment: Production (not yet)
 - [ ] Spring Security
   - [ ] Authentication
     - [ ] Form-Based Authentication
-    - [ ] Basic Authentication
-    - [ ] JWT (JSON Web Token)
+    - [x] Basic Authentication
+    - [x] JWT (JSON Web Token)
     - [ ] OAuth2
   - [ ] Authorization
     - [ ] Role-Based Access Control (RBAC)
   - [ ] CSRF Protection
   - [ ] CORS
   - [ ] Session Management
-  - [ ] Password Encoding
+  - [x] Password Encoding
 - [ ] Database
     - [ ] Database System
       - [x] H2 (In-Memory Database, Embedded)
@@ -112,9 +112,9 @@ Environment: Production (not yet)
         - [ ] Liquibase
 - [ ] ORM
   - [ ] Hibernate
-  - [ ] JPA (Java Persistence API)
+  - [x] JPA (Java Persistence API)
 - [ ] Spring Data
-  - [ ] Spring Data JPA
+  - [x] Spring Data JPA
   - [ ] Spring Data JDBC
   - [ ] Spring Data MongoDB
   - [ ] Spring Data Redis
