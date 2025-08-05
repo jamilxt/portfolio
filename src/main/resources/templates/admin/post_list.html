@@ -7,8 +7,6 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
         </div>
 
         <div class="container-fluid">
@@ -38,20 +36,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="post : ${postList}">
-                                    <td th:text="${post.title}">Tiger Nixon</td>
-                                    <td th:utext="${post.intro}">System Architect</td>
+                                <tr>
+                                    <td>Tiger Nixon</td>
+                                    <td>System Architect</td>
                                     <td>Java B-7</td>
-                                    <td th:utext="${post.published}">Edinburgh</td>
-                                    <td th:text="${#temporals.format(post.publishedAt, 'MMM dd, yyyy')}">61</td>
+                                    <td>Edinburgh</td>
+                                    <td>61</td>
                                     <td>
-                                        <a th:href="@{'/blog/details/' + ${post.slug}}" class="btn btn-info btn-sm" title="View">
+                                        <a class="btn btn-info btn-sm" title="View">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a th:href="@{'/swagger-ui/index.html'}" class="btn btn-warning btn-sm mx-1" title="Edit">
+                                        <a class="btn btn-warning btn-sm mx-1" title="Edit">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a th:href="@{'/swagger-ui/index.html}" class="btn btn-danger btn-sm" title="Delete" onclick="return confirm('Are you sure you want to delete this post?');">
+                                        <a class="btn btn-danger btn-sm" title="Delete" onclick="return confirm('Are you sure you want to delete this post?');">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </td>
