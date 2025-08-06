@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 })
 public class PostEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter
     private Long id;
 
