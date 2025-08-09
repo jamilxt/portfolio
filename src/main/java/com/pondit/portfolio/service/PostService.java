@@ -33,7 +33,7 @@ public class PostService {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "publishedAt"));
         var entityPage = postRepository.findAllByPublishedIsTrue(pageable);
         return entityPage.map(postMapper::entityToDomain);
-    }
+    }   
 
     public Long create(CreatePostRequest request) {
         var entityToSave = postMapper.createRequestToEntity(request);
