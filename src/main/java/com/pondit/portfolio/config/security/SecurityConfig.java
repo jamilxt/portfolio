@@ -17,17 +17,19 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfig {
+    private static final String[] ADMIN_PUBLIC_PAGES = {"/admin/login", "/admin/forget-password"};
 
     @Bean
     public SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .securityMatcher("/admin/**")
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/admin/**").authenticated()
-                        .anyRequest().permitAll()
+                        .requestMatchers(ADMIN_PUBLIC_PAGES).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->
-                        formLogin.loginPage("/admin/login"));
+                        formLogin.loginPage("/admin/login")
+                );
         return http.build();
     }
 
